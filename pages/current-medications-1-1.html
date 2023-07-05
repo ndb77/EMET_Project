@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>EMET</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Bootstrap-DataTables.css">
+    <link rel="stylesheet" href="assets/css/Data-Table-styles.css">
+    <link rel="stylesheet" href="assets/css/Data-Table.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/Image-slider-carousel-With-arrow-buttons-image_slider.css">
+    <link rel="stylesheet" href="assets/css/Image-slider-carousel-With-arrow-buttons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container" style="max-width: 960px;margin-bottom: 20px;">
+        <div class="row d-lg-flex justify-content-end justify-content-lg-end" style="margin-top: 12px;">
+            <div class="col-auto"><img class="d-inline-flex" src="assets/img/live-help-logo.png" width="39" height="38">
+                <p class="d-inline-flex"><em>I need assistance</em></p>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 0px;">
+            <div class="col-md-12 mx-auto" style="width: auto;">
+                <h1 class="current-medications-header">Current Medications</h1>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-lg-flex justify-content-lg-center">
+                <h4 class="text-center">According to our records, we show that you are currently taking the following medications.</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p style="text-align: center;margin-bottom: 0px;">Please <strong>scroll</strong> through the medication list below to <strong>verify the</strong> <strong>accuracy</strong> of your medications.</p>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px;">
+            <div class="col">
+                <div class="row" style="margin-bottom: 10px;margin-top: 10px;">
+                    <div class="col"><a class="btn btn-primary" role="button" style="background: rgb(163,163,163);border-color: rgb(0,0,0);padding-top: 0px;padding-left: 5px;padding-right: 5px;padding-bottom: 0px;" href="home-page.html">Go to homepage</a></div>
+                    <div class="col text-end d-lg-flex justify-content-lg-end"><a class="btn btn-primary" role="button" style="background: rgb(158,242,171);border-color: rgb(0,0,0);padding-top: 0px;padding-left: 5px;padding-right: 5px;padding-bottom: 0px;color: rgb(0,0,0);" href="add-a-medication.html">Add new medication</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-right: 0px;margin-left: 0px;margin-bottom: 10px;">
+            <div class="col" style="margin-bottom: 10px;width: 100%;padding-right: 0px;padding-left: 0px;">
+                <div class="row" style="box-shadow: 0px 0px 3px;margin-left: 0px;margin-bottom: 0px;margin-right: 0px;">
+                    <div class="col" style="padding-right: 0px;padding-left: 0px;width: 100px;background: #f1f1f1;">
+                        <div class="row mobile-scrollable-indicator">
+                            <div class="col text-end">
+                                <p>*Scrollable&nbsp;<img src="assets/img/RightArrow.png" style="width: 20px;"></p>
+                            </div>
+                        </div>
+                        <div class="hrz-txt-scroll" style="min-height: 230px;overflow: scroll;padding-right: 9px;padding-left: 0px;height: 230px;">
+                            <div class="table-responsive fixTableHead">
+                                <table class="table">
+                                    <thead style="position: sticky;">
+                                        <tr style="position: sticky;">
+                                            <th style="background: #f1f1f1;border-style: solid;">
+                                                <h5 style="background: #f1f1f1;"><strong>Medication</strong><img src="assets/img/724916.png" style="width: 10px;transform: rotate(90deg);margin-left: 5px;position: sticky;background: #f1f1f1;"></h5>
+                                            </th>
+                                            <th style="background: #f1f1f1;">
+                                                <h5 class="d-inline-flex" style="background: #f1f1f1;"><strong>Dosage</strong></h5>
+                                            </th>
+                                            <th style="background: #f1f1f1;">
+                                                <h5 style="background: #f1f1f1;"><strong>Instructions</strong></h5>
+                                            </th>
+                                            <th style="background: #f1f1f1;">
+                                                <h5 style="background: #f1f1f1;"><strong>Condition</strong><img src="assets/img/724916.png" style="width: 10px;transform: rotate(90deg);margin-left: 5px;position: sticky;background: #f1f1f1;"></h5>
+                                            </th>
+                                            <th style="background: #f1f1f1;">
+                                                <h5 style="background: #f1f1f1;"><strong>Prescriber</strong><img src="assets/img/724916.png" style="width: 10px;transform: rotate(90deg);margin-left: 5px;position: sticky;background: #f1f1f1;"></h5>
+                                            </th>
+                                            <th style="background: #f1f1f1;">
+                                                <h5 style="background: #f1f1f1;"><strong>Last Modified</strong><img src="assets/img/724916.png" style="width: 10px;transform: rotate(90deg);margin-left: 5px;position: sticky;background: #f1f1f1;"></h5>
+                                            </th>
+                                            <th style="color: #f2f2f2;background: #f1f1f1;">Column 3</th>
+                                            <th style="color: #f2f2f2;background: #f1f1f1;">Column 3</th>
+                                            <th style="color: #f2f2f2;background: #f1f1f1;">Column 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="border-width: 1px;border-style: solid;">
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Atorvatatin(Lipitor)<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">80 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Every Other Day<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">High cholesterol, coronary artery disease<br>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Williams</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Carvedilol (Coreg)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">25 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">½ tablet twice a day<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">High blood pressure, heart failure<br>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Black</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Sacubitril / Valsartan (Entresto)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">49/51 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Twice a day<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Heart failure<br>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Black</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Eplerenone (Inspra)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">50 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Every AM<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span style="color: rgb(255, 0, 0);">Heart Failure</span>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Black</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Metformin ER (Glucophage)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">500 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Every AM<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span style="color: rgb(255, 0, 0);">Diabetes</span>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Williams</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Dulaglutide (Trulicity)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">3 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Inject once a week<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span style="color: rgb(255, 0, 0);">Diabetes</span>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Williams</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Sitagliptin (Januvia)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">100 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Every AM<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td><span style="color: rgb(255, 0, 0);">Diabetes</span>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Williams</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Zolpidem (Ambien)<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">5 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">½ tablet every night<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Insomnia<br>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Willams</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Aspirin<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">&nbsp;81 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Once a day<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Coronary artery disease<br>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Willams</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="color: rgb(255,0,0);">Acetaminophen (Tylenol)&nbsp;<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">500 mg<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">one-two tablets as needed<div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p>Paragraph</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">Pain<br>
+                                                <div class="row edited-medication-info">
+                                                    <div class="col">
+                                                        <p><span style="color: rgb(255, 0, 0);">Paragraph</span></p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="color: rgb(255,0,0);">OTC</td>
+                                            <td>
+                                                <p class="edited-medication-info" style="margin-bottom: 0px;min-height: 24px;"></p>
+                                            </td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;min-height: 100%;background: var(--bs-success-border-subtle);color: var(--bs-table-striped-color);">Confirm</button></td>
+                                            <td><a class="btn btn-primary" role="button" style="height: 100%;min-height: 100%;color: rgb(0,0,0);background: var(--bs-danger-bg-subtle);" href="medication-change-make-changes.html">Change</a></td>
+                                            <td><button class="btn btn-primary" type="button" style="height: 100%;background: var(--bs-warning-bg-subtle);color: rgb(0,0,0);">Unsure</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-end"><a class="btn btn-primary" role="button" style="background: var(--bs-success);color: var(--bs-body-bg);" href="current-medication-confirm-changes.html">Confirm all and continue</a></div>
+        </div>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

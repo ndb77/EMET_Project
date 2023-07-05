@@ -1,0 +1,155 @@
+#welcome-header {
+  /*width: 382px;*/
+  /*height: 55px;*/
+  /*left: calc(50% - 382px/2);*/
+  top: 215px;
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 34.2069px;
+  /*line-height: 40px;*/
+  /*display: flex;*/
+  /*align-items: center;*/
+  text-align: center;
+  color: #000000;
+}
+
+#sign-in-heading {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+#login-info-text {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 86px;
+  color: #A6A6A6;
+}
+
+.sign-in-info-text {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  /*line-height: 86px;*/
+  color: #A6A6A6;
+}
+
+.hrz-txt-scroll {
+}
+
+.current-medications-header {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 40px;
+}
+
+.current-medications-paragraph {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.current-medications-h5 {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 500;
+}
+
+.current-medication-make-changes {
+  background: #AB2929;
+  border-radius: 20px;
+}
+
+.current-medications-save-and-return {
+  background: #9F6000;
+  border-radius: 20px;
+}
+
+.current-medications-continue {
+  background: #2C7300;
+  border-radius: 20px;
+}
+
+.horizontal-scrollable {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.landing-page-quick-links {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 12px;
+}
+
+@media (max-width: 900px) {
+  .medication-list-smaller-font {
+    font-size: 12px;
+  }
+}
+
+.medication-change-confirm-descriptor {
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .medication-list-smaller-font {
+    font-size: 12px;
+  }
+}
+
+.medications-btn-small {
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+@media (min-width: 901px) {
+  .current-medications-medication-name {
+    font-size: 16px;
+  }
+}
+
+.medications-btn-small {
+  padding-bottom: 6px;
+  padding-top: 6px;
+}
+
+.medication-change-confirm-descriptor {
+  text-align: left;
+}
+
+@media (min-width: 700px) {
+  .mobile-scrollable-indicator {
+    display: none;
+  }
+}
+
+.edited-medication-info {
+  display: none;
+}
+
+th {
+  position: sticky;
+  top: 0;
+}
+
+.tableFixHead {
+  overflow: auto;
+  height: 100px;
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+

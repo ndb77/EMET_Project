@@ -1,0 +1,40 @@
+[
+  {
+    "medicationName": "Atorvastatin (Lipitor)",
+    "dosage": "10",
+    "units": "mg",
+    "instructions": "Every Other Day",
+    "condition":"High cholesterol, coronary artery disease",
+    "prescriber": "Williams",
+    "lastModified": "today",
+    "edit":{
+      "dosage": "10 mg",
+      "instructions": "Every Other Day"
+    },
+    "confirmStatus": false
+  },
+  {
+    "medicationName": "Carvedilol (Coreg)",
+    "dosage": "25",
+    "units": "mg",
+    "instructions": "1/2 tablet every other day",
+    "condition":"High blood pressure, heart failure",
+    "prescriber": "Black",
+    "lastModified": "07/01/2023",
+    "edit":{},
+    "confirmStatus": false
+  },
+  {
+    "medicationName": "Sacubitril/Valsartan (Entresto) ",
+    "dosage": "49/51",
+    "units": "mg",
+    "instructions": "Twice a day",
+    "condition":"High blood pressure, heart failure",
+    "prescriber": "Black",
+    "lastModified": "07/01/2023",
+    "edit":{},
+    "confirmStatus": false
+  }
+]
+
+
