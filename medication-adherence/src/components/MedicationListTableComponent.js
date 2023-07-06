@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import useAxiosFetch from "../hooks/useAxiosFetch";
 import tableData1 from "../tableData.json";
 import MedicationListTableBodyComponent from "./MedicationListTableBodyComponent";
 import MedicationListTableHeadComponent from "./MedicationListTableHeadComponent";
@@ -7,7 +8,24 @@ import MedicationListTableHeadComponent from "./MedicationListTableHeadComponent
 import { useStoreState, useStoreActions } from "easy-peasy";
 
 const MedicationListTableComponent = () => {
-  const [tableData, setTableData] = useState(tableData1);
+  const [tableData, setTableData] = useState([]);
+  const medications = useStoreState((state) => state.medications);
+  useEffect(() => {
+    if (medications.length > 1) {
+      try {
+        setTableData(medications[1]);
+        console.log(medications);
+      } catch {
+        setTableData([]);
+      }
+    }
+  }, [medications]);
+  // const medicationData = useStoreState((state)=>state.medications)
+  // console.log(medicationData)
+  // useEffect(() => {
+  //   setTableData(medicationData[1])
+  //   console.log(medicationData)
+  // },[]);
 
   const columns = [
     { label: "Medication Name", accessor: "medicationName", sortable: true },
