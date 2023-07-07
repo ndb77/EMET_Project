@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
     <div className="container" style={{maxWidth: 960}}>
@@ -6,7 +7,6 @@ const HomePage = () => {
         <div className="col">
           <h1>Welcome Back, <br /><span style={{color: 'rgb(255, 0, 0)'}}>Noah Bastola</span></h1>
         </div>
-        <div className="col-auto align-self-center" style={{textAlign: 'right', width: 'auto', paddingRight: 0, paddingLeft: 0, height: 'auto', background: '#ffeaea'}}><img className="d-inline" src="/kisscc0-user-profile-computer-icons-facebook-avatar-ftkuser-5b7751e1c79415.8309983615345464018175.png" style={{width: 75}} /></div>
       </div>
       <hr />
       <div className="row">
@@ -29,7 +29,7 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="row text-center">
-                <div className="col"><a className="btn btn-primary" role="button" style={{width: '75%'}} href="appointment-information.html">Click to begin Check-in</a></div>
+                <div className="col"><Link className="btn btn-primary" to='/currentMedicationList'>Click to begin Check-in</Link></div>
               </div>
             </div>
           </div>

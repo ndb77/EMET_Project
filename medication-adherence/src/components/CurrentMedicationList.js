@@ -1,5 +1,7 @@
 import React from "react";
 import MedicationListTableComponent from "./MedicationListTableComponent";
+import helpLogo from '../img/live-help-logo.png'  
+import { Link } from "react-router-dom";
 const CurrentMedicationList = () => {
   return (
     <div className="container" style={{ maxWidth: 960, marginBottom: 20 }}>
@@ -10,7 +12,7 @@ const CurrentMedicationList = () => {
         <div className="col-auto">
           <img
             className="d-inline-flex"
-            src="/live-help-logo.png"
+            src={helpLogo}
             width={39}
             height={38}
           />
@@ -46,7 +48,7 @@ const CurrentMedicationList = () => {
         <div className="col">
           <div className="row" style={{ marginBottom: 10, marginTop: 10 }}>
             <div className="col">
-              <a
+              <Link
                 className="btn btn-primary"
                 role="button"
                 style={{
@@ -57,13 +59,13 @@ const CurrentMedicationList = () => {
                   paddingRight: 5,
                   paddingBottom: 0,
                 }}
-                href="home-page.html"
+                to="/home"
               >
                 Go to homepage
-              </a>
+              </Link>
             </div>
             <div className="col text-end d-lg-flex justify-content-lg-end">
-              <a
+              <Link
                 className="btn btn-primary"
                 role="button"
                 style={{
@@ -75,10 +77,10 @@ const CurrentMedicationList = () => {
                   paddingBottom: 0,
                   color: "rgb(0,0,0)",
                 }}
-                href="add-a-medication.html"
+                to="/addMedication"
               >
                 Add new medication
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -86,17 +88,17 @@ const CurrentMedicationList = () => {
       <MedicationListTableComponent />
       <div className="row">
         <div className="col text-end">
-          <a
+          <Link
             className="btn btn-primary"
             role="button"
             style={{
               background: "var(--bs-success)",
               color: "var(--bs-body-bg)",
             }}
-            href="current-medication-confirm-changes.html"
+            to="/updatedMedicationList"
           >
             Confirm all and continue
-          </a>
+          </Link>
         </div>
       </div>
     </div>

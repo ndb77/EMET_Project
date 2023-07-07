@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 const LoginPage = () => {
   return (
 <div className="container" style={{paddingTop: 20, maxWidth: 960}}>
@@ -36,7 +36,7 @@ const LoginPage = () => {
       </div>
     </div>
     <div className="row">
-      <div className="col-auto mx-auto"><a className="btn btn-primary" role="button" href="home-page.html">Sign In</a></div>
+      <div className="col-auto mx-auto"><Link to='/home' className="btn btn-primary" >Sign In</Link></div>
     </div>
   </div>
 </div>

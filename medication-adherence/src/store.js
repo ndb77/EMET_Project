@@ -27,16 +27,6 @@ export default createStore({
       const cleanedMedicationUpdate = removeUndefinedValues(medicationUpdate)
       medicationToEdit.edit = cleanedMedicationUpdate
       medicationToEdit.confirmStatus = 'edited'
-      console.log(medicationToEdit)
-      // console.log(medicationToEdit)
-      // const response = await api.put(`/medications/${id}`, medicationUpdate);
-
-      // actions.setMedications(
-      //   medications.map((medication) => {
-      //     if(medication.id===Number(id))
-      //     console.log(medication)
-      //   })
-      // );
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }

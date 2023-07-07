@@ -4,7 +4,7 @@ import useAxiosFetch from "../hooks/useAxiosFetch";
 import tableData1 from "../tableData.json";
 import MedicationListTableBodyComponent from "./MedicationListTableBodyComponent";
 import MedicationListTableHeadComponent from "./MedicationListTableHeadComponent";
-
+import RightArrow from '../img/RightArrow.png'
 import { useStoreState, useStoreActions } from "easy-peasy";
 
 const MedicationListTableComponent = () => {
@@ -20,13 +20,6 @@ const MedicationListTableComponent = () => {
       }
     }
   }, [medications]);
-  // const medicationData = useStoreState((state)=>state.medications)
-  // console.log(medicationData)
-  // useEffect(() => {
-  //   setTableData(medicationData[1])
-  //   console.log(medicationData)
-  // },[]);
-
   const columns = [
     { label: "Medication Name", accessor: "medicationName", sortable: true },
     { label: "Dosage", accessor: "dosage", sortable: false },
@@ -88,7 +81,7 @@ const MedicationListTableComponent = () => {
               <div className="col text-end">
                 <p>
                   *Scrollable&nbsp;
-                  <img src="/RightArrow.png" style={{ width: 20 }} />
+                  <img src={RightArrow} style={{ width: 20 }} />
                 </p>
               </div>
             </div>
