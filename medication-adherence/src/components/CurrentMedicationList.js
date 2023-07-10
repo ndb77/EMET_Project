@@ -85,7 +85,7 @@ const CurrentMedicationList = () => {
           </div>
         </div>
       </div>
-      <MedicationListTableComponent />
+      <MedicationListTableComponent/>
       <div className="row">
         <div className="col text-end">
           <Link

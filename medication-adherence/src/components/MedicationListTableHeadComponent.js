@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
-const MedicationListTableHeadComponent = ({ columns, handleSort }) => {
+const MedicationListTableHeadComponent = ({ columns, handleSort,medicationListVersion,editedList }) => {
   const [sortField, setSortField] = useState("");
   const [order, setOrder] = useState("asc");
-
   // a function that gets figures out what is the order that the table needs to be sorted in
   const handleSortingChange = (accessor) => {
     const sortOrder =
@@ -28,7 +27,7 @@ const MedicationListTableHeadComponent = ({ columns, handleSort }) => {
           return (
             <th
               key={accessor}
-              style={{ background: "f1f1f1", postion: "sticky" }}
+              style={{background: medicationListVersion==="updated"?"#a4cfbb":medicationListVersion==="editedList"?"#f4b0b7":"f1f1f1", postion: "sticky" }}
               onClick={sortable ? () => handleSortingChange(accessor) : null}
             >
               {label}

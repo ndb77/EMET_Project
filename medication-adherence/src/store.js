@@ -21,12 +21,13 @@ export default createStore({
       }
       return cleanedObj;
     }
-
     try {
       const medicationToEdit = medications[1].find((item)=>item.id===Number(id))
       const cleanedMedicationUpdate = removeUndefinedValues(medicationUpdate)
       medicationToEdit.edit = cleanedMedicationUpdate
       medicationToEdit.confirmStatus = 'edited'
+      medicationToEdit.lastModified = new Date().toISOString().slice(0, 10)
+      await api.put(`/medications/${id}`,medicationToEdit)
     } catch (err) {
       console.log(`Error: ${err.message}`);
     }

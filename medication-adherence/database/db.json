@@ -9,24 +9,26 @@
       "condition": "High cholesterol, coronary artery disease",
       "prescriber": "Williams",
       "timeTaken": "1500",
-      "lastModified": "2023-07-05",
+      "lastModified": "2023-07-10",
       "edit": {
-        "dosage": "10 mg",
-        "instructions": "Every Other Day"
+        "id": "0",
+        "clinicianStopped": true
       },
       "confirmStatus": "edited"
     },
     {
       "id": 1,
-      "medicationName": "Carvedilol (Coreg)",
+      "medicationName": "Carvedilol (Coregg)",
       "dosage": "25",
       "units": "mg",
       "instructions": "1/2 tablet twice a day",
       "condition": "High blood pressure, heart failure",
       "prescriber": "Black",
       "timeTaken": "1800",
-      "lastModified": "2023-07-01",
+      "lastModified": "2023-07-08",
       "edit": {
+        "id": "1",
+        "clinicianStopped": ""
       },
       "confirmStatus": "unedited"
     },

@@ -4,6 +4,7 @@ import { ChangeMedicationFormReason } from "./ChangeMedicationFormReason";
 import { ChangeMedicationFormReason2 } from "./ChangeMedicationFormReason2";
 import { useState } from "react";
 import { useStoreActions } from "easy-peasy";
+import { Link, useHistory } from "react-router-dom";
 const ChangeMedicationForm = ({ id }) => {
   const [clinicianStopped, setClinicianStopped] = useState("");
   const [newDosage, setNewDosage] = useState("");
@@ -14,6 +15,8 @@ const ChangeMedicationForm = ({ id }) => {
   const [other, setOther] = useState("");
 
   const [firstStepSelection, setFirstStepSelection] = useState(null);
+
+  const history = useHistory()
 
   function editDosage(edits) {
     setNewDosage(edits);
@@ -27,9 +30,7 @@ const ChangeMedicationForm = ({ id }) => {
   function editTime(edits) {
     setNewTime(edits);
   }
-  // function editDosage(field, edits) {
-  //   setFormData(submitData);
-  // }
+
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <ChangeMedicationFormReason
@@ -66,6 +67,7 @@ const ChangeMedicationForm = ({ id }) => {
       other: other.value,
     };
     editMedication(submitData);
+    history.push('/updatedMedicationList')
   }
 
   return (
@@ -82,6 +84,7 @@ const ChangeMedicationForm = ({ id }) => {
                 Back
               </button>
             )}
+            {/* {isLastStep ? <button type="submit">Finish</button> : <button type="submit">Next</button>} */}
             <button type="submit">{isLastStep ? "Finish" : "Next"}</button>
           </div>
         </form>
