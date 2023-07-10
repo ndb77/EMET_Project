@@ -23,7 +23,7 @@ const CurrentMedicationList = () => {
       </div>
       <div className="row" style={{ marginTop: 0 }}>
         <div className="col-md-12 mx-auto" style={{ width: "auto" }}>
-          <h1 className="current-medications-header">Current Medications</h1>
+          <h1 className="current-medications-header">Your Medications</h1>
           <hr />
         </div>
       </div>

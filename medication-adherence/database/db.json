@@ -18,19 +18,23 @@
     },
     {
       "id": 1,
-      "medicationName": "Carvedilol (Coregg)",
+      "medicationName": "Carvedilol (Coreg)",
       "dosage": "25",
       "units": "mg",
       "instructions": "1/2 tablet twice a day",
       "condition": "High blood pressure, heart failure",
       "prescriber": "Black",
       "timeTaken": "1800",
-      "lastModified": "2023-07-08",
+      "lastModified": "2023-07-10",
       "edit": {
         "id": "1",
-        "clinicianStopped": ""
+        "clinicianStopped": "",
+        "dosage": "80",
+        "units": "mg",
+        "instructions": "Every day ",
+        "timeTaken": "1200"
       },
-      "confirmStatus": "unedited"
+      "confirmStatus": "edited"
     },
     {
       "id": 2,

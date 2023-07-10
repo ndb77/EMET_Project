@@ -1,12 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import logo from '../img/logo-clipart.png'
 const LoginPage = () => {
   return (
 <div className="container" style={{paddingTop: 20, maxWidth: 960}}>
   <div className="col">
     <div className="row" style={{paddingBottom: 20}}>
       <div className="col-md-12">
-        <div className="mx-auto" style={{width: 150}}><img src="/logo-clipart.png" /></div>
+        <div className="mx-auto" style={{width: 150}}><img src={logo} /></div>
       </div>
     </div>
     <div className="row" style={{marginRight: 0, marginLeft: 0}}>

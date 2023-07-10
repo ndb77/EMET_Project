@@ -21,14 +21,14 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     }
   }, [medications]);
   const columns = [
-    { label: "Medication Name", accessor: "medicationName", sortable: true },
+    { label: "Medication", accessor: "medicationName", sortable: true },
     { label: "Dosage", accessor: "dosage", sortable: false },
     { label: "Units", accessor: "units", sortable: false },
     { label: "Instructions", accessor: "instructions", sortable: false },
     { label: "Condition", accessor: "condition", sortable: true },
     { label: "Prescriber", accessor: "prescriber", sortable: true },
     { label: "Time Taken", accessor: "timeTaken", sortable: true },
-    { label: "Last Modified", accessor: "lastModified", sortable: true },
+    { label: "Last Changed", accessor: "lastModified", sortable: true },
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
     { label: "", accessor: "unsure", sortable: false },
@@ -69,7 +69,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
             backgroundColor: medicationListVersion==='updated'?"#a4cfbb":"#f1f1f1",
           }}
         >
-          <h3>{medicationListVersion==='updated'? 'Updated Medication List':'Current Medication List'}</h3>
+          <h3>{medicationListVersion==='updated'? 'Updated Medications':'Current Medications'}</h3>
         </div>
         <div
           className="row"
@@ -138,7 +138,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                 backgroundColor: "#f4b0b7",
               }}
             >
-              <h3>Discontinued Medications</h3>
+              <h3>Edited Medications</h3>
             </div>
             <div
               className="row"

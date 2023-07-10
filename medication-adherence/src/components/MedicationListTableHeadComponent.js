@@ -30,7 +30,7 @@ const MedicationListTableHeadComponent = ({ columns, handleSort,medicationListVe
               style={{background: medicationListVersion==="updated"?"#a4cfbb":medicationListVersion==="editedList"?"#f4b0b7":"f1f1f1", postion: "sticky" }}
               onClick={sortable ? () => handleSortingChange(accessor) : null}
             >
-              {label}
+              <p>{label}</p>
               <img style= {{"width": "20px"}} className={icon}></img>
             </th>
           );
