@@ -5,7 +5,7 @@ const HomePage = () => {
     <div className="container" style={{maxWidth: 960}}>
       <div className="row" style={{marginTop: 10, marginRight: 10, marginLeft: 10}}>
         <div className="col">
-          <h1>Welcome Back, <br /><span style={{color: 'rgb(255, 0, 0)'}}>Noah Bastola</span></h1>
+          <h1>Welcome Back, <span style={{color: 'rgb(255, 0, 0)'}}>Noah Bastola</span></h1>
         </div>
       </div>
       <hr />

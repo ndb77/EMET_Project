@@ -32,6 +32,8 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
     { label: "", accessor: "unsure", sortable: false },
+    { label: "Notes", accessor: "notes", sortable: false },
+
   ];
   const handleSort = (sortField, sortOrder) => {
     const sorted = [...tableData].sort((a, b) => {

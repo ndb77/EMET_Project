@@ -33,8 +33,7 @@ const UpdatedMedicationList = () => {
       <div className="row">
         <div className="col">
           <p style={{ textAlign: "center", marginBottom: 0 }}>
-            Please <strong>scroll</strong> through the medication list below to{" "}
-            <strong>verify the</strong> <strong>accuracy</strong> of your
+            Please <strong>verify the accuracy</strong> of your
             medications.
           </p>
         </div>

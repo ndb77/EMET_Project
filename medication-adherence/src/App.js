@@ -1,4 +1,4 @@
-import AddMedication from "./components/AddMedication"
+import AddMedication from "./components/AddMedicationPage"
 import Appointment from "./components/Appointment"
 import CurrentMedicationList from "./components/CurrentMedicationList"
 import HomePage from "./components/HomePage"

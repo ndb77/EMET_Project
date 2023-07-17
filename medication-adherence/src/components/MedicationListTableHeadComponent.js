@@ -1,6 +1,11 @@
 import React from "react";
 import { useState } from "react";
-const MedicationListTableHeadComponent = ({ columns, handleSort,medicationListVersion,editedList }) => {
+const MedicationListTableHeadComponent = ({
+  columns,
+  handleSort,
+  medicationListVersion,
+  editedList,
+}) => {
   const [sortField, setSortField] = useState("");
   const [order, setOrder] = useState("asc");
   // a function that gets figures out what is the order that the table needs to be sorted in
@@ -24,14 +29,44 @@ const MedicationListTableHeadComponent = ({ columns, handleSort,medicationListVe
               ? "down"
               : "default"
             : "";
+          if (
+            (medicationListVersion === "updated" ||
+              medicationListVersion === "editedList") &&
+            (accessor === "confirm" ||
+              accessor === "change" ||
+              accessor === "unsure")
+          ) {
+            return null;
+          }
+          if ((medicationListVersion === "updated"||medicationListVersion==="current") && accessor === "notes") {
+            return null;
+          }
           return (
             <th
               key={accessor}
-              style={{background: medicationListVersion==="updated"?"#a4cfbb":medicationListVersion==="editedList"?"#f4b0b7":"f1f1f1", postion: "sticky" }}
+              style={{
+                background:
+                  medicationListVersion === "updated"
+                    ? "#a4cfbb"
+                    : medicationListVersion === "editedList"
+                    ? "#f4b0b7"
+                    : "f1f1f1",
+                postion: "sticky",
+              }}
               onClick={sortable ? () => handleSortingChange(accessor) : null}
             >
-              <p>{label}</p>
-              <img style= {{"width": "20px"}} className={icon}></img>
+              <p>
+                {
+                (accessor === "confirm" ||
+                  accessor === "change" ||
+                  accessor === "unsure")
+                  ? null
+                  : medicationListVersion === "editedList" &&
+                    accessor === "notes"
+                  ? "Notes"
+                  :label}
+              </p>
+              <img style={{ width: "20px" }} className={icon}></img>
             </th>
           );
         })}

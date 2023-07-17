@@ -9,12 +9,10 @@
       "condition": "High cholesterol, coronary artery disease",
       "prescriber": "Williams",
       "timeTaken": "1500",
-      "lastModified": "2023-07-05",
+      "lastModified": "2021-06-15",
       "edit": {
-        "dosage": "10 mg",
-        "instructions": "Every Other Day"
       },
-      "confirmStatus": "edited"
+      "confirmStatus": "unedited"
     },
     {
       "id": 1,
@@ -25,7 +23,7 @@
       "condition": "High blood pressure, heart failure",
       "prescriber": "Black",
       "timeTaken": "1800",
-      "lastModified": "2023-07-01",
+      "lastModified": "2021-08-04",
       "edit": {
       },
       "confirmStatus": "unedited"
@@ -39,7 +37,7 @@
       "condition": "High blood pressure, heart failure",
       "prescriber": "Black",
       "timeTaken": "1100",
-      "lastModified": "2021-05-21",
+      "lastModified": "2020-05-21",
       "edit": {},
       "confirmStatus": "unedited"
     }

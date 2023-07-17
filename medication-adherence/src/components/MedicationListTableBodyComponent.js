@@ -1,7 +1,5 @@
 import React from "react";
 import MedicationListTableBodyButton from "./MedicationListTableBodyButton";
-import { useStoreState } from "easy-peasy";
-import { useEffect, useState } from "react";
 const MedicationListTableBodyComponent = ({
   columns,
   tableData,
@@ -18,21 +16,24 @@ const MedicationListTableBodyComponent = ({
                   data[accessor]
                 ) : (
                   <MedicationListTableBodyButton
-                    id={data.id}
+                  medicationID={data.id}
                     selectionType={accessor}
                   />
                 );
                 let editValue =
-                    accessor in data["edit"] &&
+                    accessor in data["edit"] ||data["newMedication"] &&
                     data["edit"][accessor].length > 0
                       ? data["edit"][accessor]
                       : null;
                   if (data.edit && data.edit.clinicianStopped === true){
-                    editValue = ""
+                    return null
+                  }
+                  if(accessor ==="notes"){
+                    return null
                   }
                   return (
                     <>
-                      <td key={accessor}>
+                      <td key={accessor} style={{backgroundColor:data.confirmStatus==="confirmed"?'var(--bs-success-border-subtle)':data.confirmStatus==="unsure"?'var(--bs-highlight-bg)':null}}>
                         <p
                           style={{
                             color: editValue !== null ? "red" : "black",
@@ -58,26 +59,35 @@ const MedicationListTableBodyComponent = ({
             return (
               <tr key={data.id}>
                 {columns.map(({ accessor }) => {
-                  const tData = data[accessor] ? (
-                    data[accessor]
-                  ) : (
-                    <MedicationListTableBodyButton
-                      id={data.id}
-                      selectionType={accessor}
-                    />
-                  );               
+                let tData = data[accessor] 
+                if(accessor==="notes"){
+                  if(data.edit.clinicianStopped === true){
+                    console.log("Clinician Stopped",data.id)
+                    tData= "Clinician stopped med"
+                  }else if(data.edit.sideEffect){
+                    tData= `Experiencing side effects: ${data.edit.sideEffect}`
+                  }else{
+                    tData = data[accessor]           
+                  }
+                }
                 let editValue =
                   accessor in data["edit"] && data["edit"][accessor].length > 0
                     ? data["edit"][accessor]
                     : null;
+                if (data.edit && (data.edit.clinicianStopped === true||data.edit.sideEffect)){
+                  editValue = ""
+                }
+                if(accessor ==="confirm" || accessor ==="change"|| accessor ==="unsure"  ){
+                  return null
+                }
                 return (
                   <>
                     <td key={accessor}>
                       <p
                         style={{
-                          color:editValue?"red":"black",
+                          color:editValue !== null || editValue==="" ? "red" : null,
                           textDecoration:
-                            editValue !== null ? "line-through" : null,
+                            (editValue !== null || editValue==="") && accessor!=="notes" ? "line-through" : null,
                         }}
                       >
                           {tData}
@@ -97,29 +107,6 @@ const MedicationListTableBodyComponent = ({
                     </td>
                   </>
                 );
-
-                  // let editValue =
-                  //   accessor in data["edit"] &&
-                  //   data["edit"][accessor].length > 0
-                  //     ? data["edit"][accessor]
-                  //     : null;
-                  // if (data.edit && data.edit.clinicianStopped === true){
-                  //   editValue = ""
-                  // }
-                  // return (
-                  //   <>
-                  //     <td key={accessor}>
-                  //       <p
-                  //         style={{
-                  //           color: editValue !== null ? "red" : "black",
-                  //           textDecoration:editValue===""?"line-through":"none",
-                  //         }}
-                  //       >
-                  //         {editValue ? editValue : tData}
-                  //       </p>
-                  //     </td>
-                  //   </>
-                  // );
                 })}
               </tr>
             );
@@ -134,11 +121,14 @@ const MedicationListTableBodyComponent = ({
           return (
             <tr key={data.id}>
               {columns.map(({ accessor }) => {
+                if(accessor==="notes"){
+                  return null
+                }
                 const tData = data[accessor] ? (
                   data[accessor]
                 ) : (
                   <MedicationListTableBodyButton
-                    id={data.id}
+                    medicationID={data.id}
                     selectionType={accessor}
                   />
                 );
@@ -146,9 +136,10 @@ const MedicationListTableBodyComponent = ({
                   accessor in data["edit"] && data["edit"][accessor].length > 0
                     ? data["edit"][accessor]
                     : null;
+                  
                 return (
                   <>
-                    <td key={accessor}>
+                    <td key={accessor} style={{backgroundColor:data.confirmStatus==="confirmed"?'var(--bs-success-border-subtle)':data.confirmStatus==="unsure"?'var(--bs-highlight-bg)':null}}>
                       <p>{tData}</p>
                     </td>
                   </>

@@ -38,9 +38,7 @@ const CurrentMedicationList = () => {
       <div className="row">
         <div className="col">
           <p style={{ textAlign: "center", marginBottom: 0 }}>
-            Please <strong>scroll</strong> through the medication list below to{" "}
-            <strong>verify the</strong> <strong>accuracy</strong> of your
-            medications.
+            Please <strong>verify the</strong> <strong>accuracy</strong> of your medications.
           </p>
         </div>
       </div>
@@ -85,7 +83,7 @@ const CurrentMedicationList = () => {
           </div>
         </div>
       </div>
-      <MedicationListTableComponent/>
+      <MedicationListTableComponent medicationListVersion='current'/>
       <div className="row">
         <div className="col text-end">
           <Link
