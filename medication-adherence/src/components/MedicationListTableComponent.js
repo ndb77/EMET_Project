@@ -14,7 +14,6 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     if (medications.length > 1) {
       try {
         setTableData(medications[1]);
-        console.log(medications);
       } catch {
         setTableData([]);
       }
@@ -25,15 +24,15 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "Dosage", accessor: "dosage", sortable: false },
     { label: "Units", accessor: "units", sortable: false },
     { label: "Instructions", accessor: "instructions", sortable: false },
+    { label: "When Taken", accessor: "timeTaken", sortable: true },
     { label: "Condition", accessor: "condition", sortable: true },
     { label: "Prescriber", accessor: "prescriber", sortable: true },
-    { label: "Time Taken", accessor: "timeTaken", sortable: true },
     { label: "Last Changed", accessor: "lastModified", sortable: true },
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
-    { label: "", accessor: "unsure", sortable: false },
+    { label: "", accessor: "remove", sortable: false },
+    { label: "", accessor: "refill", sortable: false },
     { label: "Notes", accessor: "notes", sortable: false },
-
   ];
   const handleSort = (sortField, sortOrder) => {
     const sorted = [...tableData].sort((a, b) => {
@@ -68,7 +67,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
             marginLeft: 0,
             marginBottom: 0,
             marginRight: 0,
-            backgroundColor: medicationListVersion==='updated'?"#a4cfbb":"#f1f1f1",
+            backgroundColor: "#f1f1f1",
           }}
         >
           <h3>{medicationListVersion==='updated'? 'Updated Medications':'Current Medications'}</h3>
@@ -88,7 +87,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
               paddingRight: 0,
               paddingLeft: 0,
               width: 100,
-              background: medicationListVersion==='updated' ? "#a4cfbb" : "#f1f1f1",
+              backgroundColor:"white",
             }}
           >
             <div className="row mobile-scrollable-indicator">
@@ -109,7 +108,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                 height: 230,
               }}
             >
-              <div className="table-responsive fixTableHead">
+              <div className="table fixTableHead">
                 <table className="table">
                   <MedicationListTableHeadComponent
                     columns={columns}
@@ -137,7 +136,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                 marginBottom: 0,
                 marginRight: 0,
                 marginTop: 20,
-                backgroundColor: "#f4b0b7",
+                backgroundColor: "#f1f1f1",
               }}
             >
               <h3>Edited Medications</h3>
@@ -157,7 +156,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                   paddingRight: 0,
                   paddingLeft: 0,
                   width: 100,
-                  background: medicationListVersion ? "#f4b0b7" : "#f1f1f1",
+                  backgroundColor: "white",
                 }}
               >
                 <div className="row mobile-scrollable-indicator">
@@ -178,7 +177,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                     height: 230,
                   }}
                 >
-                  <div className="table-responsive fixTableHead">
+                  <div className="table fixTableHead">
                     <table className="table">
                       <MedicationListTableHeadComponent
                         columns={columns}

@@ -89,7 +89,7 @@ const UpdatedMedicationList = () => {
               background: "var(--bs-success)",
               color: "var(--bs-body-bg)",
             }}
-            to="/updatedMedicationList"
+            to="/updatedMedicationList/print"
           >
             Confirm all and continue
           </Link>

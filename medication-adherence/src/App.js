@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage"
 import LoginPage from "./components/LoginPage"
 import MedicationChange from "./components/MedicationChange"
 import UpdatedMedicationList from "./components/UpdatedMedicationList"
+import PrintMedications from './components/PrintMedicationsPage'
 import { Route, Switch } from 'react-router-dom';
 import { useStoreActions } from "easy-peasy";
 import useAxiosFetch from "./hooks/useAxiosFetch";
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/updatedMedicationList" component={UpdatedMedicationList} />
         <Route exact path="/addMedication" component={AddMedication} />
         <Route exact path="/medicationChange/:id" component={MedicationChange} />
+        <Route exact path='/updatedMedicationList/print' component={PrintMedications}/>
       </Switch>
     </div>
   );

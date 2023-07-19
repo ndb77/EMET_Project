@@ -153,6 +153,25 @@ th {
   z-index: 1;
 }
 
+.table-container {
+  width: 100%;
+  overflow-x: scroll;
+}
+.sticky-leftmost {
+  position: sticky;
+  left: 0;
+  background-color: white;
+}
+.sticky-rightmost {
+  position: sticky;
+  right: 0;
+  background-color: white;
+}
+.long {
+  background: yellow;
+  letter-spacing: 1em;
+}
+
 .table img.up {
   content: url("../img/up_arrow.png");
 }
@@ -185,4 +204,30 @@ th {
   background-color: #efefef ;
 }
 
+@media all {
+  .page-break {
+    display: none;
+  }
+}
+
+@media print {
+  html, body {
+    height: initial !important;
+    overflow: initial !important;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@media print {
+  .page-break {
+    margin-top: 1rem;
+    display: block;
+    page-break-after: always;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 20mm;
+}
 

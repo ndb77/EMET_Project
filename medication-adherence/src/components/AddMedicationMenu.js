@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import AddMedicationStrengthList from "./AddMedicationStrengthList";
 import AddMedicationInstructions from "./AddMedicationInstructions";
 import AddMedicationPrescriber from "./AddMedicationPrescriber";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link,useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useStoreActions, useStoreState } from "easy-peasy";
 const AddMedicationMenu = () => {
   const [search, setSearch] = useState("");
@@ -23,6 +23,7 @@ const AddMedicationMenu = () => {
   );
   const saveMedication = useStoreActions((actions) => actions.saveMedication);
   const medicationsList = useStoreState((state) => state.medications);
+  const history = useHistory()
 
   useEffect(() => {
     if (isLoading === false && search !== "" && data[1] !== []) {
@@ -61,23 +62,12 @@ const AddMedicationMenu = () => {
       setStrength('')
     }
 
-    console.log(
-      "prescriber:",
-      prescriber,
-      "instructions",
-      instructions,
-      "medicationName:",
-      medicationName,
-      "strength:",
-      strength,
-      "RXCUI",
-      medicationRXCUI
-    );
   }, [search, data, prescriber, instructions, strength, medicationRXCUI]);
 
   function splitString(string) {
+    const cleanedString = string.replace(/^\s+/, "")
     const regex = /^([\d.]+)\s*(.*)$/;
-    const match = string.match(regex);
+    const match = cleanedString.match(regex);
     if (match) {
       const quantity = match[1];
       const description = match[2];
@@ -88,6 +78,7 @@ const AddMedicationMenu = () => {
   }
 
   function handleSave(){
+    console.log(splitString(strength))
     let submitData = {
       id: medicationID,
       medicationName:medicationName,
@@ -97,7 +88,9 @@ const AddMedicationMenu = () => {
       prescriber: prescriber,
       rxcuis:medicationRXCUI
     };
+    console.log(submitData)
     saveMedication(submitData);
+    history.push('/updatedMedicationList')
   }
 
   return (

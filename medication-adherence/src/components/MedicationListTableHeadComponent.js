@@ -36,35 +36,34 @@ const MedicationListTableHeadComponent = ({
               accessor === "change" ||
               accessor === "unsure")
           ) {
-            return null;
+            return <th></th>;
           }
-          if ((medicationListVersion === "updated"||medicationListVersion==="current") && accessor === "notes") {
+          if (
+            (medicationListVersion === "updated" ||
+              medicationListVersion === "current" ||
+              medicationListVersion === "patientToPrint") &&
+            accessor === "notes"
+          ) {
             return null;
           }
           return (
             <th
+              className={accessor == "medicationName" ? "sticky-header" : "sticky-header"}
               key={accessor}
               style={{
-                background:
-                  medicationListVersion === "updated"
-                    ? "#a4cfbb"
-                    : medicationListVersion === "editedList"
-                    ? "#f4b0b7"
-                    : "f1f1f1",
-                postion: "sticky",
+                alignItems: "center",
               }}
               onClick={sortable ? () => handleSortingChange(accessor) : null}
             >
               <p>
-                {
-                (accessor === "confirm" ||
-                  accessor === "change" ||
-                  accessor === "unsure")
+                {accessor === "confirm" ||
+                accessor === "change" ||
+                accessor === "unsure"
                   ? null
                   : medicationListVersion === "editedList" &&
                     accessor === "notes"
-                  ? "Notes"
-                  :label}
+                  ? ""
+                  : label}
               </p>
               <img style={{ width: "20px" }} className={icon}></img>
             </th>

@@ -34,7 +34,7 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
       return (
         <Link to={`/medicationChange/${medicationID}`}>
           <button
-            style={{ backgroundColor: "red" }}
+            style={{ backgroundColor: "yellow" }}
           >{`${selectionType}`}</button>
         </Link>
       );
@@ -54,10 +54,42 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
           }}
         >{`${selectionType}`}</button>
       );
-    } else if(selectionType==='unsure'){
+    } else if(selectionType==='change'){
       return (
         <button
           style={{ backgroundColor: "yellow" }}
+        >{`${selectionType}`}</button>
+      );
+    }
+    else if(selectionType==='condition') {
+      return (
+        <p
+          style={{ color: "red" }}
+        >Provider will Set</p>
+      );
+    }
+    else if(selectionType==='remove'){
+      return (
+        <button
+          style={{ backgroundColor: "red" }}
+          onClick={() => {
+            console.log(medications)
+            const medicationConfirmStatus = data.find(
+              (item) => item.id === medicationID
+            ).confirmStatus;
+            changeMedicationStatus({
+              medicationID: medicationID,
+              status: medicationConfirmStatus==="removedByPatient"?"unedited":'removedByPatient'
+            })
+          }}
+        >{`${selectionType}`}</button>
+      );
+    }
+    else if(selectionType==='refill'){
+      return (
+        <button
+          style={{ backgroundColor: "blue",
+        color:'white' }}
           onClick={() => {
             console.log(medications)
             const medicationConfirmStatus = data.find(
@@ -71,13 +103,6 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
         >{`${selectionType}`}</button>
       );
     }
-    else if(selectionType==='condition') {
-      return (
-        <p
-          style={{ color: "red" }}
-        >Provider will Set</p>
-      );
-    }
     else {
       return (
         <p
@@ -89,3 +114,6 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
 };
 
 export default MedicationListTableBodyButton;
+
+
+

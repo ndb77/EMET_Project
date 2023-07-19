@@ -1,7 +1,11 @@
 import { createStore, action, thunk, computed } from "easy-peasy";
 import useAxiosFetch from "./hooks/useAxiosFetch";
 import api from "./api/medications";
-
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+today =yyyy + '-' + mm + '-'+dd;
 export default createStore({
   medications: [],
   setMedications: action((state, payload) => {
@@ -20,17 +24,14 @@ export default createStore({
       condition: '',
       prescriber: prescriber,
       timeTaken: '',
-      lastModified: new Date().toISOString().slice(0, 10),
+      lastModified: today,
       edit: {},
-      confirmStatus: 'newMedication',
       rxcui:rxcuis,
+      confirmStatus:'confirmed',
+      reconcileStatus:'false',
+      dateAdded: today,
     }
-    // id: medicationID,
-    // dosage: strength,
-    // units: strength,
-    // instructions: instructions,
-    // prescriber: prescriber,
-    // rxcuis:medicationRXCUI
+    console.log(medicationToAdd)
     try {
       const response = await api.post("/medications", medicationToAdd);
       actions.setMedications([...medications, response.data]);
@@ -57,7 +58,7 @@ export default createStore({
       const cleanedMedicationUpdate = removeUndefinedValues(medicationUpdate)
       medicationToEdit.edit = cleanedMedicationUpdate
       medicationToEdit.confirmStatus = 'edited'
-      medicationToEdit.lastModified = new Date().toISOString().slice(0, 10)
+      medicationToEdit.lastModified = today
       await api.put(`/medications/${id}`,medicationToEdit)
     } catch (err) {
       console.log(`Error: ${err.message}`);

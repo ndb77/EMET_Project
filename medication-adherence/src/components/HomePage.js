@@ -26,6 +26,8 @@ const HomePage = () => {
               <div className="row">
                 <div className="col flex-shrink-1 text-wrap">
                   <p style={{width: '100%', maxWidth: '100%'}}>With: <span style={{color: 'rgb(255, 0, 0)'}}>Dr. Williams</span><br />On:&nbsp; <span style={{color: 'rgb(255, 0, 0)'}}>6/1/23 at 2:00 pm</span></p>
+                  <p style={{width: '100%', maxWidth: '100%'}}>At: <span style={{color: 'rgb(255, 0, 0)'}}>Nebraska Medicine</span></p>
+
                 </div>
               </div>
               <div className="row text-center">
@@ -45,6 +47,8 @@ const HomePage = () => {
               <div className="row">
                 <div className="col flex-shrink-1 text-wrap">
                   <p style={{width: '100%', maxWidth: '100%'}}>With: <span style={{color: 'rgb(255, 0, 0)'}}>Dr. Black</span><br />On:&nbsp; <span style={{color: 'rgb(255, 0, 0)'}}>6/12/23 at 2:00 pm</span></p>
+                  <p style={{width: '100%', maxWidth: '100%'}}>At: <span style={{color: 'rgb(255, 0, 0)'}}>Nebraska Medicine</span></p>
+
                 </div>
               </div>
               <div className="row text-center">
@@ -64,6 +68,7 @@ const HomePage = () => {
               <div className="row">
                 <div className="col flex-shrink-1 text-wrap">
                   <p style={{width: '100%', maxWidth: '100%'}}>With: <span style={{color: 'rgb(255, 0, 0)'}}>Dr. James Tcheng </span><br />On:&nbsp; <span style={{color: 'rgb(255, 0, 0)'}}>6/21/23 at 2:00 pm</span></p>
+                  <p style={{width: '100%', maxWidth: '100%'}}>At: <span style={{color: 'rgb(255, 0, 0)'}}>Nebraska Medicine</span></p>
                 </div>
               </div>
               <div className="row text-center">
@@ -77,8 +82,7 @@ const HomePage = () => {
         <div className="col">
           <h2>Quick Links</h2>
           <ul className="landing-page-quick-links">
-            <li style={{paddingBottom: 10}}><a href="current-medications-1.html">Your Medication List</a></li>
-            <li style={{paddingBottom: 10}}><a href="#">Your Test Results</a></li>
+            <li style={{paddingBottom: 10}}><a href="current-medications-1.html">Questionaires</a></li>
             <li style={{paddingBottom: 10}}><a href="#">Your Messages</a></li>
             <li style={{paddingBottom: 10}}><a href="#">Your Appointments Calendar</a></li>
           </ul>

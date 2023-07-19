@@ -1,6 +1,6 @@
 import React from "react";
 import MedicationListTableComponent from "./MedicationListTableComponent";
-import helpLogo from '../img/live-help-logo.png'  
+import helpLogo from "../img/live-help-logo.png";
 import { Link } from "react-router-dom";
 const CurrentMedicationList = () => {
   return (
@@ -38,7 +38,8 @@ const CurrentMedicationList = () => {
       <div className="row">
         <div className="col">
           <p style={{ textAlign: "center", marginBottom: 0 }}>
-            Please <strong>verify the</strong> <strong>accuracy</strong> of your medications.
+            Please <strong>verify the</strong> <strong>accuracy</strong> of your
+            medications.
           </p>
         </div>
       </div>
@@ -83,7 +84,10 @@ const CurrentMedicationList = () => {
           </div>
         </div>
       </div>
-      <MedicationListTableComponent medicationListVersion='current'/>
+      <MedicationListTableComponent
+        medicationListVersion="current"
+        className="table"
+      />
       <div className="row">
         <div className="col text-end">
           <Link
