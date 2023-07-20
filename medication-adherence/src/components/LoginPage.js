@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import logo from '../img/logo-clipart.png'
+import FhirSignInButton from './FhirSignInButton'
 const LoginPage = () => {
   return (
 <div className="container" style={{paddingTop: 20, maxWidth: 960}}>
@@ -17,7 +18,6 @@ const LoginPage = () => {
     </div>
     <div className="row justify-content-center" style={{marginRight: 0, marginLeft: 0, paddingBottom: 0}}>
       <div className="col-auto">
-        <p id="sign-in-heading" style={{fontSize: '26.2069px'}}>Please Sign In</p>
       </div>
     </div>
     <div className="row d-lg-flex justify-content-lg-center" style={{marginRight: 0, marginLeft: 0}}>
@@ -38,6 +38,7 @@ const LoginPage = () => {
     </div>
     <div className="row">
       <div className="col-auto mx-auto"><Link to='/home' className="btn btn-primary" >Sign In</Link></div>
+      <FhirSignInButton/>
     </div>
   </div>
 </div>

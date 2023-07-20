@@ -1,6 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FHIR from "fhirclient"
+
 const HomePage = () => {
+  
+  var myApp = {}
+
+  FHIR.oauth2.ready()
+  .then(function(client){ 
+    myApp.smart = client
+    doRequests()
+  })
+
+  async function doRequests(){
+
+    var [appts,activeMeds] = await Promise.all([
+      fetch(myApp.smart.state.serverUrl+"/Appointment?patient="+myApp.smart.patient.id+"&service-category=appointment",{
+        headers:{  
+          "Accept":"application/json+fhir",
+          "Authorization":"Bearer "+myApp.smart.state.tokenResponse.access_token
+        }
+        }).then(function(data){
+          return data
+      }),
+      fetch(myApp.smart.state.serverUrl+"/MedicationRequest?patient="+myApp.smart.patient.id+"&status=active",{
+        headers:{  
+          "Accept":"application/json+fhir",
+          "Authorization":"Bearer "+myApp.smart.state.tokenResponse.access_token
+        }
+        }).then(function(data){
+          return data
+      })
+    ])
+
+    var response_appts = await appts.json()
+    var response_activeMeds = await activeMeds.json()
+    console.log('response_appts',response_appts)
+    console.log('active_meds',response_activeMeds) 
+
+
+  }
+
   return (
     <div className="container" style={{maxWidth: 960}}>
       <div className="row" style={{marginTop: 10, marginRight: 10, marginLeft: 10}}>

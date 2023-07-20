@@ -12,7 +12,7 @@
       "lastModified": "2021-07-13",
       "edit": {},
       "rxcui": "617312",
-      "confirmStatus": "removedByPatient",
+      "confirmStatus": "confirmed",
       "reconcileStatus": "false",
       "dateAdded": "2021-07-13"
     },
@@ -47,6 +47,22 @@
       "confirmStatus": "confirmed",
       "reconcileStatus": "false",
       "dateAdded": "2021-07-13"
+    },
+    {
+      "id": 3,
+      "medicationName": "Topiramate (Oral Pill)",
+      "dosage": "25",
+      "units": "mg Cap",
+      "instructions": "Once a day",
+      "condition": "",
+      "prescriber": "Bastola",
+      "timeTaken": "",
+      "lastModified": "2023-07-19",
+      "edit": {},
+      "rxcui": "205315",
+      "confirmStatus": "confirmed",
+      "reconcileStatus": "false",
+      "dateAdded": "2023-07-19"
     }
   ]
 }

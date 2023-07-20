@@ -34,7 +34,8 @@ const MedicationListTableHeadComponent = ({
               medicationListVersion === "editedList") &&
             (accessor === "confirm" ||
               accessor === "change" ||
-              accessor === "unsure")
+              accessor === "remove" ||
+              accessor === "refill")
           ) {
             return <th></th>;
           }
@@ -44,11 +45,13 @@ const MedicationListTableHeadComponent = ({
               medicationListVersion === "patientToPrint") &&
             accessor === "notes"
           ) {
-            return null;
+            return <th></th>;
           }
           return (
             <th
-              className={accessor == "medicationName" ? "sticky-header" : "sticky-header"}
+              className={
+                accessor == "medicationName" ? "sticky-header" : "sticky-header"
+              }
               key={accessor}
               style={{
                 alignItems: "center",
@@ -58,7 +61,8 @@ const MedicationListTableHeadComponent = ({
               <p>
                 {accessor === "confirm" ||
                 accessor === "change" ||
-                accessor === "unsure"
+                accessor === "remove" ||
+                accessor === "refill"
                   ? null
                   : medicationListVersion === "editedList" &&
                     accessor === "notes"

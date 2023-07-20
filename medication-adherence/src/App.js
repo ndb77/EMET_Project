@@ -16,6 +16,10 @@ function App() {
   const { data, fetchError, isLoading } = useAxiosFetch(
     "http://localhost:3500/medications"
   )
+
+  // const { data: a, fetchError: b, isLoading:c } = useAxiosFetch(
+  //   "https://fhir-open.cerner.com/r4/ec2458f2-1e24-41c8-b71b-0e701af7583d/MedicationRequest?patient=12724067&status=active"
+  // )
   useEffect(() => {
     setMedications(data);
   }, [data, setMedications]);

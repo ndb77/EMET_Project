@@ -93,7 +93,8 @@ const MedicationListTableBodyComponent = ({
                   if (
                     accessor === "confirm" ||
                     accessor === "change" ||
-                    accessor === "unsure"
+                    accessor === "remove" ||
+                    accessor === "refill"
                   ) {
                     return null;
                   }
@@ -119,7 +120,8 @@ const MedicationListTableBodyComponent = ({
                         !(
                           accessor === "confirm" ||
                           accessor === "change" ||
-                          accessor === "unsure"
+                          accessor === "remove" ||
+                          accessor === "refill"
                         ) ? (
                           <div>
                             <div className="col">
@@ -157,7 +159,8 @@ const MedicationListTableBodyComponent = ({
                   if (
                     accessor === "confirm" ||
                     accessor === "change" ||
-                    accessor === "unsure"
+                    accessor === "remove" ||
+                    accessor === "refill"
                   ) {
                     return null;
                   }
@@ -227,7 +230,8 @@ const MedicationListTableBodyComponent = ({
                   if (
                     accessor === "confirm" ||
                     accessor === "change" ||
-                    accessor === "unsure"
+                    accessor === "remove" ||
+                    accessor === "refill"
                   ) {
                     return null;
                   }
@@ -241,7 +245,7 @@ const MedicationListTableBodyComponent = ({
                                 ? "red"
                                 : null,
                             textDecoration:
-                              (editValue !== null || editValue === "") &&
+                              (editValue !== null || editValue === "" || data.confirmStatus==='removedByPatient' ) &&
                               accessor !== "notes"
                                 ? "line-through"
                                 : null,
@@ -253,7 +257,8 @@ const MedicationListTableBodyComponent = ({
                         !(
                           accessor === "confirm" ||
                           accessor === "change" ||
-                          accessor === "unsure"
+                          accessor === "remove" ||
+                          accessor === "refill"
                         ) ? (
                           <div>
                             <div className="col">

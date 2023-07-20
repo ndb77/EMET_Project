@@ -93,7 +93,7 @@ const PrintMedicationsPage = () => {
           medicationListVersion="patientToPrint"
         />
         <div className="page-break"></div>
-        <h1>Medication Assistant Sheet - Medication Changes</h1>
+        <h1>Medical Assistant Sheet - Medication Changes</h1>
         <PrintPageTable
           columns={columns}
           tableData={maPrintMedications}
