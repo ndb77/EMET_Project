@@ -8,13 +8,23 @@ var yyyy = today.getFullYear();
 today =yyyy + '-' + mm + '-'+dd;
 export default createStore({
   medications: [],
+  requestedMedications:[],
   appointments:[],
   setAppointments: action((state,payload)=>{
     state.appointments = payload
   }),
   user:{},
   setUser: action((state,payload)=>{
+    const {Bearer,PatientID} = payload    
+    let loggedInUser = {}
+    loggedInUser = {
+      'bearer': Bearer,
+      'patientID' : PatientID,
+    }
     state.user = payload
+  }),
+  setRequestedMedications: action((state, payload) => {
+    state.requestedMedications = payload
   }),
   setMedications: action((state, payload) => {
     state.medications.push(payload);

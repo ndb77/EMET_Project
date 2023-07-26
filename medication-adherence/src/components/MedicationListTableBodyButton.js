@@ -13,16 +13,14 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
   function transformToInput() {
     // Get the button element
     const button = document.querySelector("button");
-  
+
     // Create an input element
     const input = document.createElement("input");
     input.type = "text";
-  
-
   }
   useEffect(() => {
-    if (medications[1]) {
-      setData(medications[1]);
+    if (medications[0]) {
+      setData(medications[0]);
       setLoading(false);
     } else {
       setData([]);
@@ -43,77 +41,70 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
         <button
           style={{ backgroundColor: "green" }}
           onClick={() => {
-            console.log(medicationID);
-            const medicationConfirmStatus = data.find(
-              (item) => item.id === medicationID
-            ).confirmStatus;
-            changeMedicationStatus({
-              medicationID: medicationID,
-              status: medicationConfirmStatus==="confirmed"?"unedited":"confirmed"
-            })
+            const medicationConfirmStatus = data.map((entry) => {
+              if(entry.listID===medicationID){
+                return entry.confirmStatus
+              }
+            });
+            // changeMedicationStatus({
+            //   medicationID: medicationID,
+            //   status:
+            //     medicationConfirmStatus === "confirmed"
+            //       ? "unedited"
+            //       : "confirmed",
+            // });
+          console.log(String(medicationConfirmStatus))
           }}
         >{`${selectionType}`}</button>
       );
-    } else if(selectionType==='change'){
+    } else if (selectionType === "change") {
       return (
         <button
           style={{ backgroundColor: "yellow" }}
         >{`${selectionType}`}</button>
       );
-    }
-    else if(selectionType==='condition') {
-      return (
-        <p
-          style={{ color: "red" }}
-        >Provider will Set</p>
-      );
-    }
-    else if(selectionType==='remove'){
+    } else if (selectionType === "condition") {
+      return <p style={{ color: "red" }}>Provider will Set</p>;
+    } else if (selectionType === "remove") {
       return (
         <button
           style={{ backgroundColor: "red" }}
           onClick={() => {
-            console.log(medications)
+            console.log(medications);
             const medicationConfirmStatus = data.find(
               (item) => item.id === medicationID
             ).confirmStatus;
             changeMedicationStatus({
               medicationID: medicationID,
-              status: medicationConfirmStatus==="removedByPatient"?"unedited":'removedByPatient'
-            })
+              status:
+                medicationConfirmStatus === "removedByPatient"
+                  ? "unedited"
+                  : "removedByPatient",
+            });
           }}
         >{`${selectionType}`}</button>
       );
-    }
-    else if(selectionType==='refill'){
+    } else if (selectionType === "refill") {
       return (
         <button
-          style={{ backgroundColor: "blue",
-        color:'white' }}
+          style={{ backgroundColor: "blue", color: "white" }}
           onClick={() => {
-            console.log(medications)
+            console.log(medications);
             const medicationConfirmStatus = data.find(
               (item) => item.id === medicationID
             ).confirmStatus;
             changeMedicationStatus({
               medicationID: medicationID,
-              status: medicationConfirmStatus==="unsure"?"unedited":"unsure"
-            })
+              status:
+                medicationConfirmStatus === "unsure" ? "unedited" : "unsure",
+            });
           }}
         >{`${selectionType}`}</button>
       );
-    }
-    else {
-      return (
-        <p
-          style={{ color: "red" }}
-        >Set Through Change Menu</p>
-      );
+    } else {
+      return <p style={{ color: "red" }}>Set Through Change Menu</p>;
     }
   }
 };
 
 export default MedicationListTableBodyButton;
-
-
-

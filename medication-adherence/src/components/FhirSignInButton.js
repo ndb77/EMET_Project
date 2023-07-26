@@ -13,6 +13,8 @@ const FhirSignInButton = () => {
       const redirectUri = "http://localhost:3000/home"; // Replace with your redirect URI
       const serverUrl = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"; // Replace with your FHIR server URL
 
+      
+
       try {
         const authorizeLink = await FHIR.oauth2.authorize({
           client_id: clientId,

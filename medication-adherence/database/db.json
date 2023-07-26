@@ -9,10 +9,13 @@
       "condition": "High cholesterol, Coronary Artery Disease",
       "prescriber": "Williams",
       "timeTaken": "900",
-      "lastModified": "2021-07-13",
-      "edit": {},
+      "lastModified": "2023-07-24",
+      "edit": {
+        "id": "0",
+        "clinicianStopped": true
+      },
       "rxcui": "617312",
-      "confirmStatus": "confirmed",
+      "confirmStatus": "edited",
       "reconcileStatus": "false",
       "dateAdded": "2021-07-13"
     },
@@ -28,7 +31,7 @@
       "lastModified": "2021-07-13",
       "edit": {},
       "rxcui": "1656349",
-      "confirmStatus": "confirmed",
+      "confirmStatus": "unedited",
       "reconcileStatus": "false",
       "dateAdded": "2021-07-13"
     },
@@ -44,25 +47,25 @@
       "lastModified": "2021-07-13",
       "edit": {},
       "rxcui": "200033",
-      "confirmStatus": "confirmed",
+      "confirmStatus": "unedited",
       "reconcileStatus": "false",
       "dateAdded": "2021-07-13"
     },
     {
       "id": 3,
       "medicationName": "Topiramate (Oral Pill)",
-      "dosage": "25",
+      "dosage": "15",
       "units": "mg Cap",
-      "instructions": "Once a day",
+      "instructions": "once a day",
       "condition": "",
       "prescriber": "Bastola",
       "timeTaken": "",
-      "lastModified": "2023-07-19",
+      "lastModified": "2023-07-21",
       "edit": {},
-      "rxcui": "205315",
+      "rxcui": "205316",
       "confirmStatus": "confirmed",
       "reconcileStatus": "false",
-      "dateAdded": "2023-07-19"
+      "dateAdded": "2023-07-21"
     }
   ]
 }

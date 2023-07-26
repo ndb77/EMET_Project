@@ -11,9 +11,9 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
   const [tableData, setTableData] = useState([]);
   const medications = useStoreState((state) => state.medications);
   useEffect(() => {
-    if (medications.length > 1) {
+    if (medications.length > 0) {
       try {
-        setTableData(medications[1]);
+        setTableData(medications);
       } catch {
         setTableData([]);
       }
@@ -27,7 +27,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "When Taken", accessor: "timeTaken", sortable: true },
     { label: "Condition", accessor: "condition", sortable: true },
     { label: "Prescriber", accessor: "prescriber", sortable: true },
-    { label: "Last Changed", accessor: "lastModified", sortable: true },
+    { label: "Valid until", accessor: "validUntil", sortable: true },
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
     { label: "", accessor: "remove", sortable: false },
@@ -35,15 +35,15 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "Notes", accessor: "notes", sortable: false },
   ];
   const handleSort = (sortField, sortOrder) => {
-    const sorted = [...tableData].sort((a, b) => {
-      return (
-        a[sortField]
-          .toString()
-          .localeCompare(b[sortField].toString(), "en", { numeric: true }) *
-        (sortOrder === "asc" ? 1 : -1)
-      );
-    });
-    setTableData(sorted);
+    // const sorted = [...tableData].sort((a, b) => {
+    //   return (
+    //     a[sortField]
+    //       .toString()
+    //       .localeCompare(b[sortField].toString(), "en", { numeric: true }) *
+    //     (sortOrder === "asc" ? 1 : -1)
+    //   );
+    // });
+    // setTableData(sorted);
   };
 
   return (
