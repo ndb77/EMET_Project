@@ -19,8 +19,8 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
     input.type = "text";
   }
   useEffect(() => {
-    if (medications[0]) {
-      setData(medications[0]);
+    if (medications.length>0) {
+      setData(medications);
       setLoading(false);
     } else {
       setData([]);
@@ -41,19 +41,18 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
         <button
           style={{ backgroundColor: "green" }}
           onClick={() => {
-            const medicationConfirmStatus = data.map((entry) => {
-              if(entry.listID===medicationID){
-                return entry.confirmStatus
-              }
+            let medicationConfirmStatus =  data.find(
+              (item) => item.listID === medicationID
+            )
+            // console.log('data on click',data)
+            // console.log('confirmstat on click',medicationConfirmStatus.confirmStatus)
+            changeMedicationStatus({
+              medicationID: medicationID,
+              status:
+              medicationConfirmStatus.confirmStatus === "confirmed"
+                  ? "unedited"
+                  : "confirmed",
             });
-            // changeMedicationStatus({
-            //   medicationID: medicationID,
-            //   status:
-            //     medicationConfirmStatus === "confirmed"
-            //       ? "unedited"
-            //       : "confirmed",
-            // });
-          console.log(String(medicationConfirmStatus))
           }}
         >{`${selectionType}`}</button>
       );
@@ -70,14 +69,13 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
         <button
           style={{ backgroundColor: "red" }}
           onClick={() => {
-            console.log(medications);
-            const medicationConfirmStatus = data.find(
-              (item) => item.id === medicationID
-            ).confirmStatus;
+            let medicationConfirmStatus =  data.find(
+              (item) => item.listID === medicationID
+            )
             changeMedicationStatus({
               medicationID: medicationID,
               status:
-                medicationConfirmStatus === "removedByPatient"
+                medicationConfirmStatus.confirmStatus === "removedByPatient"
                   ? "unedited"
                   : "removedByPatient",
             });
@@ -89,14 +87,13 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
         <button
           style={{ backgroundColor: "blue", color: "white" }}
           onClick={() => {
-            console.log(medications);
-            const medicationConfirmStatus = data.find(
-              (item) => item.id === medicationID
-            ).confirmStatus;
+            let medicationConfirmStatus =  data.find(
+              (item) => item.listID === medicationID
+            )
             changeMedicationStatus({
               medicationID: medicationID,
               status:
-                medicationConfirmStatus === "unsure" ? "unedited" : "unsure",
+                medicationConfirmStatus.confirmStatus === "needRefill" ? "unedited" : "needRefill",
             });
           }}
         >{`${selectionType}`}</button>

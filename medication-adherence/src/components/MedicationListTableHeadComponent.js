@@ -37,7 +37,7 @@ const MedicationListTableHeadComponent = ({
               accessor === "remove" ||
               accessor === "refill")
           ) {
-            return <th></th>;
+            return <span></span>;
           }
           if (
             (medicationListVersion === "updated" ||
@@ -45,7 +45,7 @@ const MedicationListTableHeadComponent = ({
               medicationListVersion === "patientToPrint") &&
             accessor === "notes"
           ) {
-            return <th></th>;
+            return <span></span>;
           }
           return (
             <th

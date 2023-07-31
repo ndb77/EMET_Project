@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useStoreState } from "easy-peasy";
 import React from "react";
 import useAutoComplete from "../hooks/useAutoComplete";
+import AddMedicationStrengthList from "./AddMedicationStrengthList";
+import AddMedicationWhenTaken from "./AddMedicationWhenTaken";
 export function ChangeMedicationFormReason2({
   firstStepSelection,
   setClinicianStopped,
@@ -19,24 +21,30 @@ export function ChangeMedicationFormReason2({
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [strengthResult, setStrengthResult] = useState([]);
+  const [medicationWhenTaken, setMedicationWhenTaken] = useState("");
   const [strength, setStrength] = useState("");
+  const [dosage, setDosage] = useState("");
+  const [currentStrength, setCurrentStrength] = useState("");
   const [strengthID, setStrengthID] = useState(null);
   const [instructions, setInstructions] = useState("");
-  const { autoCompleteData, autoCompleteFetchError, autoCompleteDataLoading } = useAutoComplete(
-    `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?&terms=${medications!==null?medications[1].filter(medication=>medication.id==1)[0].medicationName.split(" ")[0]:""}&maxList=5&sf=DISPLAY_NAME,STRENGTHS_AND_FORMS&df=DISPLAY_NAME,STRENGTHS_AND_FORMS`
-  );
 
   useEffect(() => {
-    autoCompleteData==[]?setSearchResult([]):setSearchResult(autoCompleteData[3])
-    // if(searchResult!==[]){
-    //   setLoading(false)
-    //   setSearchResult(autoCompleteData[3])
-    // }
-  }, [medications,autoCompleteData]);
+    if (medications.length > 0) {
+      const medicationToEdit = medications.filter((entry) => {
+        return entry.listID.toString() === id.toString();
+      });
+      setStrengthResult(medicationToEdit[0].rxNormData.drugObject[1]);
+      setCurrentStrength(
+        medicationToEdit[0].rxNormData.dosage +
+          " " +
+          medicationToEdit[0].rxNormData.dosageUnits
+      );
+    }
+  }, [medications]);
 
   if (!isLoading) {
     return <div>Loading</div>;
-  }else{
+  } else {
     if (firstStepSelection === "clinicianStop") {
       setClinicianStopped(true);
       return (
@@ -49,28 +57,17 @@ export function ChangeMedicationFormReason2({
         </div>
       );
     } else if (firstStepSelection === "changeSomething") {
-      console.log(autoCompleteData)
       return (
         <div className="card-body">
           <h4>Change something</h4>
           <p>Please use the appropriate text boxes to type your edits</p>
-          <p></p>
-          <input
-            name="dosage"
-            type="text"
-            placeholder="New Dosage?"
-            onChange={(e) => {
-              editDosage(e.target);
-            }}
-          ></input>
-          <input
-            name="dosage"
-            type="text"
-            placeholder="units"
-            onChange={(e) => {
-              editUnits(e.target);
-            }}
-          ></input>
+          <AddMedicationStrengthList
+            editDosage={editDosage}
+            editUnits = {editUnits}
+            strengthResult={strengthResult}
+            currentStrength={currentStrength}
+
+          />
           <p></p>
           <input
             type="text"
@@ -80,13 +77,9 @@ export function ChangeMedicationFormReason2({
             }}
           ></input>
           <p></p>
-          <input
-            type="text"
-            placeholder="New time?"
-            onChange={(e) => {
-              editTime(e.target);
-            }}
-          ></input>
+          <AddMedicationWhenTaken
+            editTime={editTime}
+          />
         </div>
       );
     } else if (firstStepSelection === "sideEffects") {
@@ -117,5 +110,4 @@ export function ChangeMedicationFormReason2({
       );
     }
   }
-
 }

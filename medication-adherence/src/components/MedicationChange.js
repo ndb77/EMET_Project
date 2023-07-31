@@ -8,14 +8,25 @@ const MedicationChange = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const medications = useStoreState((state) => state.medications);
-
+  function extractDate(inputString) {
+    const regex =
+      /Until (?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (\d{1,2}\/\d{1,2}\/\d{4})/;
+    const matches = inputString.match(regex);
+    return matches ? matches[1] : null;
+  }
+  function formatDate(inputDate) {
+    const dateParts = inputDate.split("/");
+    const year = dateParts[2];
+    const month = dateParts[0].padStart(2, "0");
+    const day = dateParts[1].padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
   useEffect(() => {
-    if (medications.length > 1) {
-      setData(medications[1]);
+    if (medications.length > 0) {
+      setData(medications);
       setLoading(false);
     }
   }, [medications]);
-
   return (
     <div className="container" style={{ marginTop: 12, maxWidth: 960 }}>
       <div className="row">
@@ -42,19 +53,19 @@ const MedicationChange = () => {
                   <th>Condition</th>
                   <th>Prescriber</th>
                   <th>Time Taken</th>
-                  <th>Last Modified</th>
+                  <th>Valid Until</th>
                 </tr>
               </thead>
-              {console.log(data.length)}{console.log(id)}
+              {/* {console.log(data.length)}{console.log(id)} */}
               <tbody style={{ borderWidth: 1, borderStyle: "solid" }}>
-                <td>{data.length===0 ? "loading" : data[id]["medicationName"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["dosage"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["units"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["instructions"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["condition"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["prescriber"]}</td>
+                <td>{data.length===0 ? "loading" : data[id]["rxNormData"]['drugName']}</td>
+                <td>{data.length===0  ? "loading" : data[id]["rxNormData"]["dosage"]}</td>
+                <td>{data.length===0  ? "loading" : data[id]["rxNormData"]["dosageUnits"]}</td>
+                <td>{data.length===0  ? "loading" : data[id]["dosageInstructions"][0]["patientInstruction"]}</td>
+                <td>{data.length===0  ? "loading" : data[id]["reasonCode"]["text"]}</td>
+                <td>{data.length===0  ? "loading" : data[id]["requester"]}</td>
                 <td>{data.length===0  ? "loading" : data[id]["timeTaken"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["lastModified"]}</td>
+                <td>{data.length===0  ? "loading" : formatDate(extractDate(data[id]["dosageInstructions"][0]["text"]))}</td>
                 <tr></tr>
               </tbody>
             </table>

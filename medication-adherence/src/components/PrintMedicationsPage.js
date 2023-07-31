@@ -1,9 +1,8 @@
 import { useStoreState } from "easy-peasy";
 import { useEffect, useState, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import MedicationListTableHeadComponent from "./MedicationListTableHeadComponent";
-import MedicationListTableBodyComponent from "./MedicationListTableBodyComponent";
 import { PrintPageTable } from "./PrintPageTable";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const PrintMedicationsPage = () => {
   const componentRef = useRef();
@@ -15,7 +14,7 @@ const PrintMedicationsPage = () => {
     { label: "When Taken", accessor: "timeTaken", sortable: true },
     { label: "Condition", accessor: "condition", sortable: true },
     { label: "Prescriber", accessor: "prescriber", sortable: true },
-    { label: "Last Changed", accessor: "lastModified", sortable: true },
+    { label: "Valid Until", accessor: "validUntil", sortable: true },
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
     { label: "", accessor: "unsure", sortable: false },
@@ -42,10 +41,11 @@ const PrintMedicationsPage = () => {
   const handleSortForPrintMaMedicationList = (sortField, sortOrder) => {
     const sorted = [...medications].sort((a, b) => {
       return (
-        a['medicationName']
+        a["medicationName"]
           .toString()
-          .localeCompare(b['medicationName'].toString(), "en", { numeric: true }) *
-        (-1)
+          .localeCompare(b["medicationName"].toString(), "en", {
+            numeric: true,
+          }) * -1
       );
     });
     setMaPrintMedications(sorted);
@@ -54,23 +54,24 @@ const PrintMedicationsPage = () => {
   const handleSortForPrintPcpMedicationList = (sortField, sortOrder) => {
     const sorted = [...medications].sort((a, b) => {
       return (
-        a['medicationName']
+        a["medicationName"]
           .toString()
-          .localeCompare(b['medicationName'].toString(), "en", { numeric: true }) *
-        (1)
+          .localeCompare(b["medicationName"].toString(), "en", {
+            numeric: true,
+          }) * 1
       );
     });
     setPcpPrintMedications(sorted);
   };
 
   useEffect(() => {
-    if (medicationsList.length > 1) {
+    if (medicationsList.length !== []) {
       try {
-        const meds = medicationsList[1]
+        const meds = medicationsList;
         setMedications(meds);
-        setPatientPrintMedications(meds)
-        setMaPrintMedications(meds)
-        setPcpPrintMedications(meds)
+        setPatientPrintMedications(meds);
+        setMaPrintMedications(meds);
+        setPcpPrintMedications(meds);
       } catch {
         setMedications([]);
       }
@@ -81,9 +82,17 @@ const PrintMedicationsPage = () => {
     content: () => componentRef.current,
   });
 
+  const handleFinish = () =>{
+    console.log(medicationsList)
+  }
   return (
     <div>
-      <button onClick={handlePrint}>Print Tables</button>
+      <div>
+        <button onClick={handlePrint} style={{margin:'20px'}}>Print Tables</button>
+        <Link>
+          <button style={{margin:'20px'}} onClick={handleFinish}>Finish and return home</button>
+        </Link>
+      </div>
       <div ref={componentRef}>
         <h1>Patient Sheet - Updated List</h1>
         <PrintPageTable

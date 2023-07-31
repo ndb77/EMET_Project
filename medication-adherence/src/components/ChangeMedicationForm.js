@@ -53,16 +53,15 @@ const ChangeMedicationForm = ({ id }) => {
   function onSubmit(e) {
     e.preventDefault();
     if (!isLastStep) {
-      console.log(firstStepSelection);
       return next();
     }
     let submitData = {
       id: id,
       clinicianStopped: clinicianStopped,
-      dosage: newDosage.value,
-      units: newUnits.value,
+      dosage: newDosage,
+      units: newUnits,
       instructions: newInstructions.value,
-      timeTaken: newTime.value,
+      timeTaken: newTime,
       sideEffect: newSideEffect.value,
       other: other.value,
     };

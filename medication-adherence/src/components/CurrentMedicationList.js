@@ -99,7 +99,7 @@ const CurrentMedicationList = () => {
             }}
             to="/updatedMedicationList"
           >
-            Confirm all and continue
+             Continue
           </Link>
         </div>
       </div>

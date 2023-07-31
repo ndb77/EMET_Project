@@ -3,7 +3,6 @@ import FHIR from "fhirclient";
 import { useStoreState, useStoreActions, action } from "easy-peasy";
 import HomePageUpcomingAppointmentsComponent from "./HomePageUpcomingAppointmentsComponent";
 const HomePage = () => {
-
   // Stores the logged in user's credentials into the browser's local storage
   const setUser = useStoreActions((actions) => actions.setUser);
 
@@ -12,7 +11,12 @@ const HomePage = () => {
     (actions) => actions.setRequestedMedications
   );
 
-  const setMedications = useStoreActions((actions)=>actions.setMedications)
+  // setMedications will store store the list of current medications.
+  // the outer layer of the list is the a running history of medications added to the list
+  // the inner layer of the list is the list of medicatiosn for that iteration in the history
+  // for example, the first storage of the medication list with one medication on the list is [0(history version)][0(medication list)]
+  // the second storage of the medication list with 3 neew medications on the list will be [1][0-2(medication list)]
+  const setMedications = useStoreActions((actions) => actions.setMedications);
 
   const [userAppointments, setUserAppointments] = useState(null);
   const [userPatient, setUserPatient] = useState(null);
@@ -23,42 +27,36 @@ const HomePage = () => {
     // function to create the connection to EPIC
     FHIR.oauth2.ready().then(function (client) {
       myApp.smart = client;
-      if (userAppointments != null && userPatient != null) {
+      if (userPatient != null) {
         setIsLoading(false);
       } else {
         // requests for data that are sent to EPIC
         doRequests();
       }
     });
-  }, [userAppointments]);
+  }, [userPatient]);
 
   async function doRequests() {
-    // test EPIC patient ID and bearer. Not the same patient as was logged in with. 
+    // test EPIC patient ID and bearer. Not the same patient as was logged in with.
     // Needed because logged in patient does not have any future appointments
-    const appointmentsPatientID = "erXuFYUfucBZaryVksYEcMg3";
-    const appointmentsPatientBearer =
-      "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1cm46b2lkOmZoaXIiLCJjbGllbnRfaWQiOiJkOWYwN2JlNi0yOGNkLTQ2OWEtYjJjMS1jNjU5NWNjODE5MDEiLCJlcGljLmVjaSI6InVybjplcGljOk9wZW4uRXBpYy1jdXJyZW50IiwiZXBpYy5tZXRhZGF0YSI6IktvNjVnQlVvbURXVEZELURlR3AtbmtSUUxiRDlPb3JGY2NraGdfaUJ6dEtiVHp0VnhwWGNHRUZYcEJGcTdwUEJ1WFZWN3BUUUV5Y1B0OVFNRzREaWxOQ2lNUDFnbW4yblV4ZFlUaENtUW5BZjAwdHVaWW1NeG1DTUtReUxuaVE3IiwiZXBpYy50b2tlbnR5cGUiOiJhY2Nlc3MiLCJleHAiOjE2OTA0MTM3ODAsImlhdCI6MTY5MDQxMDE4MCwiaXNzIjoidXJuOm9pZDpmaGlyIiwianRpIjoiYjBjY2MyMDMtOGU0My00NjAyLWJhMDAtZjFiZjM3MzIyOWIzIiwibmJmIjoxNjkwNDEwMTgwLCJzdWIiOiJldk5wLUtoWXdPT3FBWm4xcFoyZW51QTMifQ.IKIA_8usjoQzpCo4KapRl0te8TQCWWEtSJrkGUtqqMio1BzAt0_sg6yJj0IWCmR1o3F8seDW4B4poTJb1vj_rq_l3rxrnq_WD6GZzowEon9FiS7_gH7n8Pug4li2cnyZQNWSc17Aiatkqee5wuajsh9uZc_x67kw11L_dMH5-rq_8OS-aXcb9kHTDl1a6dWY3odDpXd-_p4uJ-A99inE0-seyn_Jp6scFtOCHQxrUr8x9UEY_1oKp5HtrZoM7VKDAa9VtLB5o5c-ifVXgbiiOzsqmPgjPPQBRpKCrgSh_36Z6h5v6PwbXaLFuEp98tVyLB_37lXknSUFyjfGX_2yRw";
+    const appointmentsPatientID = null; // "erXuFYUfucBZaryVksYEcMg3";
+    const appointmentsPatientBearer = null;
+    // "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1cm46b2lkOmZoaXIiLCJjbGllbnRfaWQiOiJkOWYwN2JlNi0yOGNkLTQ2OWEtYjJjMS1jNjU5NWNjODE5MDEiLCJlcGljLmVjaSI6InVybjplcGljOk9wZW4uRXBpYy1jdXJyZW50IiwiZXBpYy5tZXRhZGF0YSI6Im1ITEk0RnA2Y2xmeVpaeXdFc2d3Zl85MVB2Q1NZM1dLMmNwSzN6S1NEbUVyQlduVXlqeVdpOXAyRHZlTExzQkpHa2F0MjZacklCdnV3X3Z5ZUVPMW1lODV5TzJxckxGMFAteENfQ0tYaVE4VzI4SmRfVFpVUEsxZFp1Mk1GcWE4IiwiZXBpYy50b2tlbnR5cGUiOiJhY2Nlc3MiLCJleHAiOjE2OTA1NzA1MzYsImlhdCI6MTY5MDU2NjkzNiwiaXNzIjoidXJuOm9pZDpmaGlyIiwianRpIjoiZWY4NjI1N2QtMDE3OC00ODY0LTg0NGItNDY2MjAzYjQ3ODE2IiwibmJmIjoxNjkwNTY2OTM2LCJzdWIiOiJldk5wLUtoWXdPT3FBWm4xcFoyZW51QTMifQ.nmY-rzK8oSxCN9KLZ2bXV_bRUcyJrJ-HCFVYkEcqUXbb7uyiYz7RXntbAS_EcSzntACwmOFj9Jyx6hZcWMcU-2oig9Pa-vzxXXPVgx-v2qD_HxoFd-zOywQb4eqgBkeSOtI1ITvllF0QCgSW7IX91LQcFs3T1umT8RCWm-yuHHV68jafSDPReL_5iFLUvVF5wfjxgN2GdVoPrJI0q9gDmhD70psnL05PJEdpzCwdLijn_44eS7QSbgtjMqx_m77-O4h-feF-2LG9mMa8dTL6Nt_FiKlbztVCLyyFYP6qv8rI1i5kKV8MVu-6xbI2R2LwsknyOAA5mjklGbmHcjcBYw";
     // getting Appointment, Patient, and MedicationRequest(active only) resources
     var [appts, patient, activeMeds] = await Promise.all([
       fetch(
         myApp.smart.state.serverUrl +
           "/Appointment?patient=" +
-          (appointmentsPatientID
-            ? appointmentsPatientID
-            : myApp.smart.patient.id) +
+          myApp.smart.patient.id +
           "&service-category=appointment",
         {
           headers: {
             Accept: "application/json+fhir",
             Authorization:
-              "Bearer " +
-              (appointmentsPatientBearer
-                ? appointmentsPatientBearer
-                : myApp.smart.state.tokenResponse.access_token),
+              "Bearer " + myApp.smart.state.tokenResponse.access_token,
           },
         }
       ).then(function (data) {
-        console.log(data);
         return data;
       }),
       fetch(
@@ -154,7 +152,7 @@ const HomePage = () => {
       const medicationDataList = [];
 
       if (activeMeds && activeMeds.entry && Array.isArray(activeMeds.entry)) {
-        let id = 0
+        let id = 0;
         activeMeds.entry.forEach((entry) => {
           if (
             entry.resource &&
@@ -180,7 +178,7 @@ const HomePage = () => {
               medicationRequest.dispenseRequest.validityPeriod.start;
             medicationDataList.push({
               listID: id,
-              confirmStatus:'unedited',
+              confirmStatus: "unedited",
               medicationReferenceDisplay,
               medicationReferenceId,
               dosageInstructions,
@@ -189,28 +187,27 @@ const HomePage = () => {
               requester,
               status,
               validityPeriodStart,
-              resource: entry.resource
+              resource: entry.resource,
             });
           }
-          id = id+1;
+          id = id + 1;
         });
       }
 
       return medicationDataList;
     }
 
-
-    console.log("response_appts", response_appts);
-    console.log("active_meds", response_activeMeds);
-    console.log("patient", response_patient.name[0].text);
+    // console.log("response_appts", response_appts);
+    // console.log("active_meds", response_activeMeds);
+    // console.log("patient", response_patient.name[0].text);
     const closestAppointments = getFutureAppointments(response_appts);
-    console.log("closest future 3 appointments", closestAppointments);
+    // console.log("closest future 3 appointments", closestAppointments);
     setUserAppointments(closestAppointments);
     const allActorsList = extractAllActorsForAllEntries(response_appts);
-    console.log("all actors", allActorsList);
+    // console.log("all actors", allActorsList);
 
     const medicationDataList = extractMedicationData(response_activeMeds);
-    console.log("medications data list", medicationDataList);
+    // console.log("medications data list", medicationDataList);
     setRequestedMedications(medicationDataList);
 
     //Looks up the medications in the medication data list by Epic reference ID
@@ -268,7 +265,7 @@ const HomePage = () => {
       const promises = searchList.map((searchTerm) =>
         getApiResponse(searchTerm)
       );
-      console.log("promises", promises);
+      // console.log("promises", promises);
       return Promise.all(promises);
     }
 
@@ -290,77 +287,89 @@ const HomePage = () => {
 
     function findDrugObjectWithDose(resl, searchString) {
       let result = {};
-    
+
       for (const entry of resl) {
         const drugObject = entry[3][0];
-        if (drugObject[1].includes(searchString)) {
-          const drugObjectModified = drugObject.map(item => {
-            return item.includes(',') ? item.split(',') : item;
+        const nameList = drugObject[1].split(",");
+        // console.log("searchstring", searchString);
+        if (
+          nameList.some((item) => item.includes(searchString.toLowerCase()))
+        ) {
+          const drugObjectModified = drugObject.map((val) => {
+            return val.includes(",") ? val.split(",") : val;
           });
           result = {
             drugName: entry[1][0],
-            drugObject: drugObjectModified
+            drugObject: drugObjectModified,
           };
         }
       }
-    
+
       return result;
     }
 
     function extractNumberAndUnits(medicationName) {
       const regex = /(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)\s+(\S+)/;
       const match = medicationName.match(regex);
-    
+
       return match
         ? { number: `${match[1]}-${match[2]}`, units: match[3] }
         : null;
     }
-    
+
     function appendDrugObjectToMedList(medLookup, medList, drugObject) {
       // Extract the medicationReferenceId from medLookup
-      const medLookupId = medLookup[0]['id'];
-    
+      const medLookupId = medLookup[0]["id"];
+
       // Find the index in medList that matches the medicationReferenceId
-      const index = medList.findIndex(item => item.medicationReferenceId.split('/')[1] === medLookupId);
-    
+      const index = medList.findIndex(
+        (item) => item.medicationReferenceId.split("/")[1] === medLookupId
+      );
+
       // If the index is found, create the drugObject using the data from medLookup
       if (index !== -1) {
         // Append the drugObject to the correct entry in medList
         medList[index]["rxNormData"] = drugObject;
-        medList[index]['edits'] = {}
+        medList[index]["edits"] = {};
       }
-    
+
       return medList;
     }
 
     fetchMedicationData()
       .then((medicationLookupValue) => {
-        console.log("medLookup", medicationLookupValue);
+        // console.log("medLookup", medicationLookupValue);
         const medicationSearchValues = extractRxNormCodes(
           medicationLookupValue
         );
-        const dosageAmount = extractNumberAndUnits(medicationLookupValue[0].code.text).number
-        const dosageUnits = extractNumberAndUnits(medicationLookupValue[0].code.text).units
-        console.log('searchVals',medicationSearchValues);
+        const dosageAmount = extractNumberAndUnits(
+          medicationLookupValue[0].code.text
+        ).number;
+        const dosageUnits = extractNumberAndUnits(
+          medicationLookupValue[0].code.text
+        ).units;
+        // console.log("searchVals", medicationSearchValues);
         try {
           const rxTermsResponses = getMultipleApiResponses(
             medicationSearchValues
-          ).then((result) => {
-            return result.filter(
-              (entry) => entry[1].length > 0 && entry[3].length > 0
-            );
-          }).then((result)=>{
-
-            console.log('resl',result)
-            const searchString = dosageAmount + ' ' + dosageUnits
-            let drugObject = findDrugObjectWithDose(result,searchString)
-            drugObject['dosage'] = dosageAmount
-            drugObject['dosageUnits'] = dosageUnits
-            console.log('obj',drugObject)
-            appendDrugObjectToMedList(medicationLookupValue,medicationDataList,drugObject)
-            console.log('newList',medicationDataList)
-            setMedications(medicationDataList)
-          });
+          )
+            .then((result) => {
+              return result.filter(
+                (entry) => entry[1].length > 0 && entry[3].length > 0
+              );
+            })
+            .then((result) => {
+              const searchString = dosageAmount + " " + dosageUnits;
+              let drugObject = findDrugObjectWithDose(result, searchString);
+              drugObject["dosage"] = dosageAmount;
+              drugObject["dosageUnits"] = dosageUnits.toLowerCase();
+              appendDrugObjectToMedList(
+                medicationLookupValue,
+                medicationDataList,
+                drugObject
+              );
+              setMedications(medicationDataList);
+            });
           // const filteredRxTermsResponses = rxTermsResponses.filter(entry => entry[1].length > 0 && entry[3].length > 0);
           // You can now use the rxTermsResponses constant containing the list of responses.
         } catch (error) {
@@ -372,16 +381,17 @@ const HomePage = () => {
       });
 
     setUserPatient(response_patient.name[0].text);
-    console.log(userAppointments);
     setUser({
       Bearer: myApp.smart.state.tokenResponse.access_token,
       PatientID: myApp.smart.patient.id,
+      patientDisplay: response_patient.name[0].text
     });
   }
 
   if (isLoading) {
     return <div>Loading</div>;
   } else {
+    // console.log("userAppointments", userAppointments.length > 0);
     return (
       <div className="container" style={{ maxWidth: 960 }}>
         <div
@@ -403,24 +413,66 @@ const HomePage = () => {
         </div>
         <div className="row row-cols-3 text-nowrap text-truncate d-flex flex-nowrap horizontal-scrollable">
           <HomePageUpcomingAppointmentsComponent
-            appointmentType={userAppointments[0].serviceCategoryText}
-            physician={userAppointments[0].actors[1].display}
-            startTime={userAppointments[0].startTime}
-            location={userAppointments[0].actors[2].display}
+            appointmentType={
+              userAppointments.length > 0
+                ? userAppointments[0].serviceCategoryText
+                : ""
+            }
+            physician={
+              userAppointments.length > 0
+                ? userAppointments[0].actors[1].display
+                : ""
+            }
+            startTime={
+              userAppointments.length > 0 ? userAppointments[0].startTime : ""
+            }
+            location={
+              userAppointments.length > 0
+                ? userAppointments[0].actors[2].display
+                : ""
+            }
             checkInAvailable={true}
           />
           <HomePageUpcomingAppointmentsComponent
-            appointmentType={userAppointments[1].serviceCategoryText}
-            physician={userAppointments[1].actors[1].display}
-            startTime={userAppointments[1].startTime}
-            location={userAppointments[1].actors[2].display}
+            appointmentType={
+              userAppointments.length > 0
+                ? userAppointments[1].serviceCategoryText
+                : ""
+            }
+            physician={
+              userAppointments.length > 0
+                ? userAppointments[1].actors[1].display
+                : ""
+            }
+            startTime={
+              userAppointments.length > 0 ? userAppointments[1].startTime : ""
+            }
+            location={
+              userAppointments.length > 0
+                ? userAppointments[1].actors[2].display
+                : ""
+            }
             checkInAvailable={false}
           />
           <HomePageUpcomingAppointmentsComponent
-            appointmentType={userAppointments[2].serviceCategoryText}
-            physician={userAppointments[2].actors[1].display}
-            startTime={userAppointments[2].startTime}
-            location={userAppointments[2].actors[2].display}
+            appointmentType={
+              userAppointments.length > 0
+                ? userAppointments[2].serviceCategoryText
+                : ""
+            }
+            physician={
+              userAppointments.length > 0
+                ? userAppointments[2].actors[1].display
+                : ""
+            }
+            startTime={
+              userAppointments.length > 0 ? userAppointments[2].startTime : ""
+            }
+            location={
+              userAppointments.length > 0
+                ? userAppointments[2].actors[2].display
+                : ""
+            }
             checkInAvailable={false}
           />
         </div>

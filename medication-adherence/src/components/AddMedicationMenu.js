@@ -8,6 +8,8 @@ import AddMedicationInstructions from "./AddMedicationInstructions";
 import AddMedicationPrescriber from "./AddMedicationPrescriber";
 import { Link,useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useStoreActions, useStoreState } from "easy-peasy";
+import AddMedicationValidUntilDate from "./AddMedicationValidUntilDate";
+import AddMedicationWhenTaken from "./AddMedicationWhenTaken";
 const AddMedicationMenu = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -18,6 +20,8 @@ const AddMedicationMenu = () => {
   const [medicationName, setMedicationName] = useState("");
   const [medicationRXCUI, setMedicationRXCUI] = useState("");
   const [medicationID, setMedicationID] = useState("");
+  const [validUntilDate,setValidUntilDate] = useState("")
+  const [medicationWhenTaken,setMedicationWhenTaken] = useState("")
   const { data, fetchError, isLoading } = useAxiosFetch(
     `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?&terms=${search}&maxList=5&sf=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS,&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS`
   );
@@ -32,10 +36,8 @@ const AddMedicationMenu = () => {
       setSearchResult([]);
     }
     if (isLoading === false && search !== "" && data[3].length > 0) {
-      console.log('results',data[3][0][1].split(","))
       setMedicationID(()=>{
-        console.log(medicationsList[1][medicationsList[1].length-1].id)
-        return medicationsList[1].length ? medicationsList[1][medicationsList[1].length-1].id + 1 : 0;
+        return medicationsList.length ? medicationsList[medicationsList.length-1].listID + 1 : 0;
       })
       setStrengthResult(data[3][0][1].split(","));
       setMedicationRXCUI(() => {
@@ -53,7 +55,6 @@ const AddMedicationMenu = () => {
           );
           setStrength(strength)
         }
-        console.log('data',data[3][0],'//')
         return data[3][0][2].split(",")[index];
       });
       
@@ -65,8 +66,8 @@ const AddMedicationMenu = () => {
   }, [search, data, prescriber, instructions, strength, medicationRXCUI]);
 
   function splitString(string) {
-    const cleanedString = string.replace(/^\s+/, "")
-    const regex = /^([\d.]+)\s*(.*)$/;
+    const cleanedString = string.replace(/^\s+/, "");
+    const regex = /^([\d.-]+)\s*(.*)$/; // Updated regex to allow for decimal, hyphen, and dot in quantity
     const match = cleanedString.match(regex);
     if (match) {
       const quantity = match[1];
@@ -78,17 +79,18 @@ const AddMedicationMenu = () => {
   }
 
   function handleSave(){
-    console.log(splitString(strength))
     let submitData = {
       id: medicationID,
       medicationName:medicationName,
       dosage: splitString(strength)[0], // /\s/.test(strength)?splitString(strength)[0]:'none',
       units: splitString(strength)[1],// /\s/.test(strength)?splitString(strength)[1]:'none',
+      whenTaken:medicationWhenTaken,
       instructions: instructions,
       prescriber: prescriber,
-      rxcuis:medicationRXCUI
+      rxcuis:medicationRXCUI,
+      validUntilDate:validUntilDate,
+      drugObject: data[3][0],
     };
-    console.log(submitData)
     saveMedication(submitData);
     history.push('/updatedMedicationList')
   }
@@ -170,6 +172,32 @@ const AddMedicationMenu = () => {
                       <AddMedicationPrescriber setPrescriber={setPrescriber} />
                     </div>
                   </div>
+                  <div
+                    className="row d-flex"
+                    style={{ minHeight: 38, marginBottom: 10 }}
+                  >
+                    <div className="col">
+                      <h4 style={{ textAlign: "right" }}>
+                        Valid Until?
+                      </h4>
+                    </div>
+                    <div className="col">
+                      <AddMedicationValidUntilDate setValidUntilDate={setValidUntilDate} />
+                    </div>
+                  </div>
+                  <div
+                    className="row d-flex"
+                    style={{ minHeight: 38, marginBottom: 10 }}
+                  >
+                    <div className="col">
+                      <h4 style={{ textAlign: "right" }}>
+                        What time do you take it?
+                      </h4>
+                    </div>
+                    <div className="col">
+                      <AddMedicationWhenTaken setMedicationWhenTaken={setMedicationWhenTaken} />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -215,23 +243,3 @@ const AddMedicationMenu = () => {
 };
 
 export default AddMedicationMenu;
-
-// function handleSave(e) {
-//   e.preventDefault();
-//   if (!isLastStep) {
-//     console.log(firstStepSelection);
-//     return next();
-//   }
-//   let submitData = {
-//     id: id,
-//     clinicianStopped: clinicianStopped,
-//     dosage: newDosage.value,
-//     units: newUnits.value,
-//     instructions: newInstructions.value,
-//     timeTaken: newTime.value,
-//     sideEffect: newSideEffect.value,
-//     other: other.value,
-//   };
-//   editMedication(submitData);
-//   history.push('/updatedMedicationList')
-// }

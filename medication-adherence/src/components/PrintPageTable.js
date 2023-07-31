@@ -1,6 +1,6 @@
 import React from "react";
 import MedicationListTableHeadComponent from "./MedicationListTableHeadComponent";
-import MedicationListTableBodyComponent from "./MedicationListTableBodyComponent";
+import MedicationListTable from "./MedicationListTable";
 import { useState } from "react";
 
 export const PrintPageTable = React.forwardRef(
@@ -18,7 +18,7 @@ export const PrintPageTable = React.forwardRef(
                     medicationListVersion={props.medicationListVersion}
                   />
           
-          <MedicationListTableBodyComponent
+          <MedicationListTable
             columns={props.columns}
             tableData={props.tableData}
             medicationListVersion={props.medicationListVersion}

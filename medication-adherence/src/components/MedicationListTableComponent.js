@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import useAxiosFetch from "../hooks/useAxiosFetch";
-import tableData1 from "../tableData.json";
-import MedicationListTableBodyComponent from "./MedicationListTableBodyComponent";
 import MedicationListTableHeadComponent from "./MedicationListTableHeadComponent";
+import MedicationListTable from "./MedicationListTable";
 import RightArrow from "../img/RightArrow.png";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
@@ -11,7 +9,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
   const [tableData, setTableData] = useState([]);
   const medications = useStoreState((state) => state.medications);
   useEffect(() => {
-    if (medications.length > 0) {
+    if (medications.length !==[]) {
       try {
         setTableData(medications);
       } catch {
@@ -35,15 +33,59 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "Notes", accessor: "notes", sortable: false },
   ];
   const handleSort = (sortField, sortOrder) => {
-    // const sorted = [...tableData].sort((a, b) => {
-    //   return (
-    //     a[sortField]
-    //       .toString()
-    //       .localeCompare(b[sortField].toString(), "en", { numeric: true }) *
-    //     (sortOrder === "asc" ? 1 : -1)
-    //   );
-    // });
-    // setTableData(sorted);
+    function extractAndFormatUntilDate(text) {
+      // Regular expression to match the "Until" date pattern (e.g., "Until Wed 5/27/2020")
+      const regex = /Until\s(\w+\s\d{1,2}\/\d{1,2}\/\d{4})/;
+    
+      // Extract the "Until" date using the regular expression
+      const match = text.match(regex);
+    
+      if (match && match[1]) {
+        // Extracted "Until" date in the format "M/D/YYYY"
+        const untilDate = match[1];
+    
+        // Convert the "M/D/YYYY" date format to "YYYY-MM-DD" format
+        const [month, day, year] = untilDate.split('/');
+        const formattedUntilDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    
+        return formattedUntilDate;
+      } else {
+        // Return null if the "Until" date is not found or the text doesn't match the pattern
+        return null;
+      }
+    }
+    
+    const sorted = [...tableData].sort((a, b) => {
+      let toSortA = null
+      let toSortB = null
+      if(sortField==='medicationName'){
+        toSortA = a.rxNormData.drugName
+        toSortB = b.rxNormData.drugName
+      }
+      if(sortField==='timeTaken'){
+        toSortA = a.medicationWhenTaken
+        toSortB = b.medicationWhenTaken
+      }
+      if(sortField==='condition'){
+        toSortA = a.reasonCode.text
+        toSortB = b.reasonCode.text
+      }
+      if(sortField==='prescriber'){
+        toSortA = a.requester
+        toSortB = b.requester
+      }
+      if(sortField==='validUntil'){
+        toSortA = a.validityPeriodEnd?a.validityPeriodEnd:a.dosageInstructions!==[]?extractAndFormatUntilDate(a.dosageInstructions[0].text):null
+        toSortB = b.validityPeriodEnd?b.validityPeriodEnd:b.dosageInstructions!==[]?extractAndFormatUntilDate(b.dosageInstructions[0].text):null
+      }
+      return (
+        toSortA
+          .toString()
+          .localeCompare(toSortB.toString(), "en", { numeric: true }) *
+        (sortOrder === "asc" ? 1 : -1)
+      );
+    });
+    setTableData(sorted);
   };
 
   return (
@@ -115,7 +157,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                     handleSort={handleSort}
                     medicationListVersion={medicationListVersion}
                   />
-                  <MedicationListTableBodyComponent
+                  <MedicationListTable
                     columns={columns}
                     tableData={tableData}
                     medicationListVersion={medicationListVersion}
@@ -184,7 +226,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
                         handleSort={handleSort}
                         medicationListVersion="editedList"
                       />
-                      <MedicationListTableBodyComponent
+                      <MedicationListTable
                         columns={columns}
                         tableData={tableData}
                         medicationListVersion="editedList"
