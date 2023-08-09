@@ -1,5 +1,4 @@
 import React from "react";
-import useScript from "../hooks/useScript";
 import { useState } from "react";
 const AddMedicationSearchBar = ({ search,setSearch,setSearchResult, searchResult,setMedicationName,setStrength}) => {
   const [clicked,setClicked] = useState(false)

@@ -40,7 +40,6 @@ export default createStore({
       instructions,
       prescriber,
       drugObject,
-      validUntilDate,
       rxcuis,
     } = newMedication;
     const medicationToAdd = 
@@ -84,7 +83,6 @@ export default createStore({
       requester: prescriber,
       status: 'active',
       validityPeriodStart: today,
-      validityPeriodEnd: validUntilDate,
       resource: {
         resourceType: 'MedicationRequest',
         id: `patientAdded.${id}`,

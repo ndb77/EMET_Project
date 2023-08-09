@@ -39,21 +39,20 @@ const HomePage = () => {
   async function doRequests() {
     // test EPIC patient ID and bearer. Not the same patient as was logged in with.
     // Needed because logged in patient does not have any future appointments
-    const appointmentsPatientID = null; // "erXuFYUfucBZaryVksYEcMg3";
-    const appointmentsPatientBearer = null;
-    // "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1cm46b2lkOmZoaXIiLCJjbGllbnRfaWQiOiJkOWYwN2JlNi0yOGNkLTQ2OWEtYjJjMS1jNjU5NWNjODE5MDEiLCJlcGljLmVjaSI6InVybjplcGljOk9wZW4uRXBpYy1jdXJyZW50IiwiZXBpYy5tZXRhZGF0YSI6Im1ITEk0RnA2Y2xmeVpaeXdFc2d3Zl85MVB2Q1NZM1dLMmNwSzN6S1NEbUVyQlduVXlqeVdpOXAyRHZlTExzQkpHa2F0MjZacklCdnV3X3Z5ZUVPMW1lODV5TzJxckxGMFAteENfQ0tYaVE4VzI4SmRfVFpVUEsxZFp1Mk1GcWE4IiwiZXBpYy50b2tlbnR5cGUiOiJhY2Nlc3MiLCJleHAiOjE2OTA1NzA1MzYsImlhdCI6MTY5MDU2NjkzNiwiaXNzIjoidXJuOm9pZDpmaGlyIiwianRpIjoiZWY4NjI1N2QtMDE3OC00ODY0LTg0NGItNDY2MjAzYjQ3ODE2IiwibmJmIjoxNjkwNTY2OTM2LCJzdWIiOiJldk5wLUtoWXdPT3FBWm4xcFoyZW51QTMifQ.nmY-rzK8oSxCN9KLZ2bXV_bRUcyJrJ-HCFVYkEcqUXbb7uyiYz7RXntbAS_EcSzntACwmOFj9Jyx6hZcWMcU-2oig9Pa-vzxXXPVgx-v2qD_HxoFd-zOywQb4eqgBkeSOtI1ITvllF0QCgSW7IX91LQcFs3T1umT8RCWm-yuHHV68jafSDPReL_5iFLUvVF5wfjxgN2GdVoPrJI0q9gDmhD70psnL05PJEdpzCwdLijn_44eS7QSbgtjMqx_m77-O4h-feF-2LG9mMa8dTL6Nt_FiKlbztVCLyyFYP6qv8rI1i5kKV8MVu-6xbI2R2LwsknyOAA5mjklGbmHcjcBYw";
+    const appointmentsPatientID = "erXuFYUfucBZaryVksYEcMg3";
+    const appointmentsPatientBearer = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1cm46b2lkOmZoaXIiLCJjbGllbnRfaWQiOiJkOWYwN2JlNi0yOGNkLTQ2OWEtYjJjMS1jNjU5NWNjODE5MDEiLCJlcGljLmVjaSI6InVybjplcGljOk9wZW4uRXBpYy1jdXJyZW50IiwiZXBpYy5tZXRhZGF0YSI6IjNwMXhORlJRRDhXcEkzc1REZ2JxZFkzeHpoaENyZFZxOG9razJXcGVUM25wUWxFR0tXTG9weEFUamhtVjVJeU5BSGZRUVpiWXhJQzYyUlN1MHVScEdxajI5aWl2Y1pHZUg3RTI3NDdRanFrYWV6ZzVWanU2aVQ5ODVkcEpTbDI2IiwiZXBpYy50b2tlbnR5cGUiOiJhY2Nlc3MiLCJleHAiOjE2OTE1MjAwOTksImlhdCI6MTY5MTUxNjQ5OSwiaXNzIjoidXJuOm9pZDpmaGlyIiwianRpIjoiZjk2M2VmYzctOWZkZC00NTU2LTkwZTEtNDc1NWRlYWIzMTA3IiwibmJmIjoxNjkxNTE2NDk5LCJzdWIiOiJldk5wLUtoWXdPT3FBWm4xcFoyZW51QTMifQ.Z62O0lQobaGAFH4I3usXBXkun1aqbZsHW6Tib-6vKYMx7X_CFTxwCXlp2K4dYPSoX3FPnoPZ9MGluxjpu-i3OW0EL4FIonMhd7dEZhCyb_45bdjfRcRFx3Xt01lCXkp4pNo5HCyCTPYAvh9Tolfnznk6VBhgIjF2gwW5C46u4phGoGgpbF8E3cN1RKcoUqAhPRLxt64HFSPEbWu2vgqoVaNPzHQMCBbQlvzp7qLm5X1Pe7LZvltC1NDg91O1CQUhbJt5rhCovVwsMlwwA9n8C_WaD5Fqmpjm0pxgpZbPWq2pFpBeXljGGL427yF80sE3kvWk4x2GU2NPlA-_1OsuvA";
     // getting Appointment, Patient, and MedicationRequest(active only) resources
+    console.log('req',myApp.smart.state.serverUrl +
+    "/Appointment?patient=" + appointmentsPatientID + "&service-category=appointment")
     var [appts, patient, activeMeds] = await Promise.all([
       fetch(
         myApp.smart.state.serverUrl +
-          "/Appointment?patient=" +
-          myApp.smart.patient.id +
-          "&service-category=appointment",
+          "/Appointment?patient=" + appointmentsPatientID + "&service-category=appointment",
         {
           headers: {
             Accept: "application/json+fhir",
             Authorization:
-              "Bearer " + myApp.smart.state.tokenResponse.access_token,
+              "Bearer " + appointmentsPatientBearer,
           },
         }
       ).then(function (data) {
@@ -92,6 +91,10 @@ const HomePage = () => {
     var response_appts = await appts.json();
     var response_activeMeds = await activeMeds.json();
     var response_patient = await patient.json();
+
+    console.log('response_appointments',response_appts)
+    console.log('response_activeMeds',response_activeMeds)
+    console.log('response_patient',response_patient)
 
     // functions to extract relevant data
     function extractAllActorsForEntry(entry) {
@@ -174,8 +177,6 @@ const HomePage = () => {
               ? medicationRequest.requester.display
               : null;
             const status = medicationRequest.status;
-            const validityPeriodStart =
-              medicationRequest.dispenseRequest.validityPeriod.start;
             medicationDataList.push({
               listID: id,
               confirmStatus: "unedited",
@@ -186,7 +187,6 @@ const HomePage = () => {
               reasonCode,
               requester,
               status,
-              validityPeriodStart,
               resource: entry.resource,
             });
           }
@@ -201,8 +201,9 @@ const HomePage = () => {
     // console.log("active_meds", response_activeMeds);
     // console.log("patient", response_patient.name[0].text);
     const closestAppointments = getFutureAppointments(response_appts);
-    // console.log("closest future 3 appointments", closestAppointments);
+    console.log("closest future 3 appointments", closestAppointments);
     setUserAppointments(closestAppointments);
+    console.log(userAppointments)
     const allActorsList = extractAllActorsForAllEntries(response_appts);
     // console.log("all actors", allActorsList);
 
@@ -391,7 +392,7 @@ const HomePage = () => {
   if (isLoading) {
     return <div>Loading</div>;
   } else {
-    // console.log("userAppointments", userAppointments.length > 0);
+    console.log("userAppointments", userAppointments);
     return (
       <div className="container" style={{ maxWidth: 960 }}>
         <div
@@ -414,64 +415,64 @@ const HomePage = () => {
         <div className="row row-cols-3 text-nowrap text-truncate d-flex flex-nowrap horizontal-scrollable">
           <HomePageUpcomingAppointmentsComponent
             appointmentType={
-              userAppointments.length > 0
+              userAppointments[0]
                 ? userAppointments[0].serviceCategoryText
-                : ""
+                : "Dummy Description"
             }
             physician={
-              userAppointments.length > 0
+              userAppointments[0]
                 ? userAppointments[0].actors[1].display
-                : ""
+                : "Dummy Physician"
             }
             startTime={
-              userAppointments.length > 0 ? userAppointments[0].startTime : ""
+              userAppointments[0] ? userAppointments[0].startTime : "00:00 AM"
             }
             location={
-              userAppointments.length > 0
+              userAppointments[0]
                 ? userAppointments[0].actors[2].display
-                : ""
+                : "Dummy location"
             }
             checkInAvailable={true}
           />
           <HomePageUpcomingAppointmentsComponent
             appointmentType={
-              userAppointments.length > 0
+              userAppointments[1]
                 ? userAppointments[1].serviceCategoryText
-                : ""
+                : "Dummy Description"
             }
             physician={
-              userAppointments.length > 0
+              userAppointments[1]
                 ? userAppointments[1].actors[1].display
-                : ""
+                : "Dummy Physician"
             }
             startTime={
-              userAppointments.length > 0 ? userAppointments[1].startTime : ""
+              userAppointments[1] ? userAppointments[1].startTime : "00:00 AM"
             }
             location={
-              userAppointments.length > 0
+              userAppointments[1]
                 ? userAppointments[1].actors[2].display
-                : ""
+                : "Dummy location"
             }
             checkInAvailable={false}
           />
           <HomePageUpcomingAppointmentsComponent
             appointmentType={
-              userAppointments.length > 0
+              userAppointments[2]
                 ? userAppointments[2].serviceCategoryText
-                : ""
+                : "Dummy Description"
             }
             physician={
-              userAppointments.length > 0
+              userAppointments[2]
                 ? userAppointments[2].actors[1].display
-                : ""
+                : "Dummy Physician"
             }
             startTime={
-              userAppointments.length > 0 ? userAppointments[2].startTime : ""
+              userAppointments[2] ? userAppointments[2].startTime : "00:00 AM"
             }
             location={
-              userAppointments.length > 0
+              userAppointments[2]
                 ? userAppointments[2].actors[2].display
-                : ""
+                : "Dummy Location"
             }
             checkInAvailable={false}
           />

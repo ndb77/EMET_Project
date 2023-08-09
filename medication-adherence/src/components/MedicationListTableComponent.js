@@ -25,7 +25,6 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "When Taken", accessor: "timeTaken", sortable: true },
     { label: "Condition", accessor: "condition", sortable: true },
     { label: "Prescriber", accessor: "prescriber", sortable: true },
-    { label: "Valid until", accessor: "validUntil", sortable: true },
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
     { label: "", accessor: "remove", sortable: false },
@@ -73,10 +72,6 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
       if(sortField==='prescriber'){
         toSortA = a.requester
         toSortB = b.requester
-      }
-      if(sortField==='validUntil'){
-        toSortA = a.validityPeriodEnd?a.validityPeriodEnd:a.dosageInstructions!==[]?extractAndFormatUntilDate(a.dosageInstructions[0].text):null
-        toSortB = b.validityPeriodEnd?b.validityPeriodEnd:b.dosageInstructions!==[]?extractAndFormatUntilDate(b.dosageInstructions[0].text):null
       }
       return (
         toSortA

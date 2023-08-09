@@ -8,7 +8,7 @@ import AddMedicationInstructions from "./AddMedicationInstructions";
 import AddMedicationPrescriber from "./AddMedicationPrescriber";
 import { Link,useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import AddMedicationValidUntilDate from "./AddMedicationValidUntilDate";
+// import AddMedicationValidUntilDate from "./AddMedicationValidUntilDate";
 import AddMedicationWhenTaken from "./AddMedicationWhenTaken";
 const AddMedicationMenu = () => {
   const [search, setSearch] = useState("");
@@ -20,7 +20,7 @@ const AddMedicationMenu = () => {
   const [medicationName, setMedicationName] = useState("");
   const [medicationRXCUI, setMedicationRXCUI] = useState("");
   const [medicationID, setMedicationID] = useState("");
-  const [validUntilDate,setValidUntilDate] = useState("")
+  // const [validUntilDate,setValidUntilDate] = useState("")
   const [medicationWhenTaken,setMedicationWhenTaken] = useState("")
   const { data, fetchError, isLoading } = useAxiosFetch(
     `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?&terms=${search}&maxList=5&sf=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS,&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS`
@@ -88,7 +88,6 @@ const AddMedicationMenu = () => {
       instructions: instructions,
       prescriber: prescriber,
       rxcuis:medicationRXCUI,
-      validUntilDate:validUntilDate,
       drugObject: data[3][0],
     };
     saveMedication(submitData);
@@ -170,19 +169,6 @@ const AddMedicationMenu = () => {
                     </div>
                     <div className="col">
                       <AddMedicationPrescriber setPrescriber={setPrescriber} />
-                    </div>
-                  </div>
-                  <div
-                    className="row d-flex"
-                    style={{ minHeight: 38, marginBottom: 10 }}
-                  >
-                    <div className="col">
-                      <h4 style={{ textAlign: "right" }}>
-                        Valid Until?
-                      </h4>
-                    </div>
-                    <div className="col">
-                      <AddMedicationValidUntilDate setValidUntilDate={setValidUntilDate} />
                     </div>
                   </div>
                   <div

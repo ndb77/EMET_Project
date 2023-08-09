@@ -75,10 +75,6 @@ const MedicationListTable = ({ columns, tableData, medicationListVersion }) => {
                 tData = entry["reasonCode"]["text"];
               } else if (accessor === "prescriber") {
                 tData = entry["requester"];
-              } else if (accessor === "validUntil") {
-                tData = formatDate(
-                  extractDate(entry["dosageInstructions"][0]["text"])
-                );
               } else {
                 tData = null;
               }
@@ -179,14 +175,6 @@ const MedicationListTable = ({ columns, tableData, medicationListVersion }) => {
                   tData = entry["reasonCode"]["text"];
                 } else if (accessor === "prescriber") {
                   tData = entry["requester"];
-                } else if (accessor === "validUntil") {
-                  tData = entry.validityPeriodEnd
-                    ? entry.validityPeriodEnd
-                    : entry.dosageInstructions !== []
-                    ? formatDate(
-                        extractDate(entry["dosageInstructions"][0]["text"])
-                      )
-                    : null;
                 } else {
                   tData = null;
                 }
@@ -314,14 +302,6 @@ const MedicationListTable = ({ columns, tableData, medicationListVersion }) => {
                 tData = entry["reasonCode"]["text"];
               } else if (accessor === "prescriber") {
                 tData = entry["requester"];
-              } else if (accessor === "validUntil") {
-                tData = entry.validityPeriodEnd
-                  ? entry.validityPeriodEnd
-                  : entry.dosageInstructions !== []
-                  ? formatDate(
-                      extractDate(entry["dosageInstructions"][0]["text"])
-                    )
-                  : null;
               } else {
                 tData = null;
               }
@@ -445,14 +425,6 @@ const MedicationListTable = ({ columns, tableData, medicationListVersion }) => {
                   tData = entry["reasonCode"]["text"];
                 } else if (accessor === "prescriber") {
                   tData = entry["requester"];
-                } else if (accessor === "validUntil") {
-                  tData = entry.validityPeriodEnd
-                    ? entry.validityPeriodEnd
-                    : entry.dosageInstructions !== []
-                    ? formatDate(
-                        extractDate(entry["dosageInstructions"][0]["text"])
-                      )
-                    : null;
                 } else {
                   tData = null;
                 }

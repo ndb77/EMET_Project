@@ -8,25 +8,28 @@ const MedicationChange = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const medications = useStoreState((state) => state.medications);
-  function extractDate(inputString) {
-    const regex =
-      /Until (?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (\d{1,2}\/\d{1,2}\/\d{4})/;
-    const matches = inputString.match(regex);
-    return matches ? matches[1] : null;
+  
+  function convertToAMPM(time24h) {
+    let [hours, minutes] = time24h.split(':').map(Number);
+    let period = 'AM';
+    
+    if (hours >= 12) {
+      period = 'PM';
+      if (hours > 12) {
+        hours -= 12;
+      }
+    }
+    
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')} ${period}`;
   }
-  function formatDate(inputDate) {
-    const dateParts = inputDate.split("/");
-    const year = dateParts[2];
-    const month = dateParts[0].padStart(2, "0");
-    const day = dateParts[1].padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
+
   useEffect(() => {
     if (medications.length > 0) {
       setData(medications);
       setLoading(false);
     }
   }, [medications]);
+
   return (
     <div className="container" style={{ marginTop: 12, maxWidth: 960 }}>
       <div className="row">
@@ -53,10 +56,8 @@ const MedicationChange = () => {
                   <th>Condition</th>
                   <th>Prescriber</th>
                   <th>Time Taken</th>
-                  <th>Valid Until</th>
                 </tr>
               </thead>
-              {/* {console.log(data.length)}{console.log(id)} */}
               <tbody style={{ borderWidth: 1, borderStyle: "solid" }}>
                 <td>{data.length===0 ? "loading" : data[id]["rxNormData"]['drugName']}</td>
                 <td>{data.length===0  ? "loading" : data[id]["rxNormData"]["dosage"]}</td>
@@ -64,8 +65,7 @@ const MedicationChange = () => {
                 <td>{data.length===0  ? "loading" : data[id]["dosageInstructions"][0]["patientInstruction"]}</td>
                 <td>{data.length===0  ? "loading" : data[id]["reasonCode"]["text"]}</td>
                 <td>{data.length===0  ? "loading" : data[id]["requester"]}</td>
-                <td>{data.length===0  ? "loading" : data[id]["timeTaken"]}</td>
-                <td>{data.length===0  ? "loading" : formatDate(extractDate(data[id]["dosageInstructions"][0]["text"]))}</td>
+                <td>{data.length===0  ? "loading" : data[id]["medicationWhenTaken"]?convertToAMPM(data[id]["medicationWhenTaken"]):null}</td>
                 <tr></tr>
               </tbody>
             </table>

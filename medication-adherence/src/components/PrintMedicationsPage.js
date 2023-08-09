@@ -14,7 +14,6 @@ const PrintMedicationsPage = () => {
     { label: "When Taken", accessor: "timeTaken", sortable: true },
     { label: "Condition", accessor: "condition", sortable: true },
     { label: "Prescriber", accessor: "prescriber", sortable: true },
-    { label: "Valid Until", accessor: "validUntil", sortable: true },
     { label: "", accessor: "confirm", sortable: false },
     { label: "", accessor: "change", sortable: false },
     { label: "", accessor: "unsure", sortable: false },
@@ -89,7 +88,7 @@ const PrintMedicationsPage = () => {
     <div>
       <div>
         <button onClick={handlePrint} style={{margin:'20px'}}>Print Tables</button>
-        <Link>
+        <Link to='/home'>
           <button style={{margin:'20px'}} onClick={handleFinish}>Finish and return home</button>
         </Link>
       </div>
