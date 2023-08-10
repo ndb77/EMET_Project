@@ -5,14 +5,14 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimeField } from "@mui/x-date-pickers/TimeField";
 
+// Renders a time picker and sends the selected time to the parent
+// The time is sent to the parents in 24h time so that it is easily sorted within the medication list table
 const AddMedicationWhenTaken = ({ setMedicationWhenTaken,editTime }) => {
   const [time, setTime] = useState("");
 
   // Function to handle time selection and logging the selected time
   const handleTimeChange = (newTime) => {
-    // Format the selected time in 12-hour format with am/pm
-    const selectedTime = newTime.format("hh:mm A");
-    
+
     // Get the 24-hour time separately
     const time24Hour = newTime.format("HH:mm");
     

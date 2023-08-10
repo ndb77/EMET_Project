@@ -5,6 +5,8 @@ import MedicationListTable from "./MedicationListTable";
 import RightArrow from "../img/RightArrow.png";
 import { useStoreState, useStoreActions } from "easy-peasy";
 
+// Renders the table for the medicationList dynamically according to what is version is provided through the props. 
+// Provides the sort function to the TableHeadComponent which registers which heading was clicked, then provides ListTable component with the newly organized table data 
 const MedicationListTableComponent = ({ medicationListVersion }) => {
   const [tableData, setTableData] = useState([]);
   const medications = useStoreState((state) => state.medications);
@@ -31,29 +33,7 @@ const MedicationListTableComponent = ({ medicationListVersion }) => {
     { label: "", accessor: "refill", sortable: false },
     { label: "Notes", accessor: "notes", sortable: false },
   ];
-  const handleSort = (sortField, sortOrder) => {
-    function extractAndFormatUntilDate(text) {
-      // Regular expression to match the "Until" date pattern (e.g., "Until Wed 5/27/2020")
-      const regex = /Until\s(\w+\s\d{1,2}\/\d{1,2}\/\d{4})/;
-    
-      // Extract the "Until" date using the regular expression
-      const match = text.match(regex);
-    
-      if (match && match[1]) {
-        // Extracted "Until" date in the format "M/D/YYYY"
-        const untilDate = match[1];
-    
-        // Convert the "M/D/YYYY" date format to "YYYY-MM-DD" format
-        const [month, day, year] = untilDate.split('/');
-        const formattedUntilDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-    
-        return formattedUntilDate;
-      } else {
-        // Return null if the "Until" date is not found or the text doesn't match the pattern
-        return null;
-      }
-    }
-    
+  const handleSort = (sortField, sortOrder) => {    
     const sorted = [...tableData].sort((a, b) => {
       let toSortA = null
       let toSortB = null

@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import logo from "../img/logo-clipart.png";
 import FhirSignInButton from "./FhirSignInButton";
 
+//Renders the login page. This page automatically redirects to the epic login page
 const LoginPage = () => {
   return (
     <div className="container" style={{ paddingTop: 20, maxWidth: 960 }}>
@@ -95,7 +95,7 @@ const LoginPage = () => {
         <div className="row">
           <div className="col-auto mx-auto">
             {" "}
-            {/* Automatically redirects to the epic sign-in pae */}
+            {/* Automatically redirects to the epic sign-in page */}
             <FhirSignInButton />
           </div>
         </div>

@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useStoreState } from "easy-peasy";
 import React from "react";
-import useAutoComplete from "../hooks/useAutoComplete";
 import AddMedicationStrengthList from "./AddMedicationStrengthList";
 import AddMedicationWhenTaken from "./AddMedicationWhenTaken";
+
+// The second step of the Change medication Form
+// Recieves information about which option was selected in the first step of the form from the the parent and renders the page according to the selected option
+// Sends user input back to parent to be sent to the store.
 export function ChangeMedicationFormReason2({
   firstStepSelection,
   setClinicianStopped,
@@ -17,16 +20,8 @@ export function ChangeMedicationFormReason2({
 }) {
   const [isLoading, setLoading] = useState(true);
   const medications = useStoreState((state) => state.medications);
-
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
   const [strengthResult, setStrengthResult] = useState([]);
-  const [medicationWhenTaken, setMedicationWhenTaken] = useState("");
-  const [strength, setStrength] = useState("");
-  const [dosage, setDosage] = useState("");
   const [currentStrength, setCurrentStrength] = useState("");
-  const [strengthID, setStrengthID] = useState(null);
-  const [instructions, setInstructions] = useState("");
 
   useEffect(() => {
     if (medications.length > 0) {

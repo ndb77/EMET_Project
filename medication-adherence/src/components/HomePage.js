@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import FHIR from "fhirclient";
-import { useStoreState, useStoreActions, action } from "easy-peasy";
+import { useStoreActions } from "easy-peasy";
 import HomePageUpcomingAppointmentsComponent from "./HomePageUpcomingAppointmentsComponent";
+
+// When the home page is loaded, it makes API calls to EPIC using the authentication information stored by the FHIRSignInButton within the fhirclient
+// It uses a variety of functions to convert the API response into data structures are then stored into the application local storage to be used by the components in the rest of the app
 const HomePage = () => {
   // Stores the logged in user's credentials into the browser's local storage
   const setUser = useStoreActions((actions) => actions.setUser);
@@ -103,11 +106,6 @@ const HomePage = () => {
       return participants.map((participant) => participant.actor);
     }
 
-    function extractAllActorsForAllEntries(obj) {
-      const entries = obj.entry || [];
-      return entries.map((entry) => extractAllActorsForEntry(entry));
-    }
-
     function getDifferenceInMinutes(date1, date2) {
       const diffInMs = new Date(date1) - new Date(date2);
       return Math.abs(Math.round(diffInMs / (1000 * 60)));
@@ -152,6 +150,8 @@ const HomePage = () => {
       return result;
     }
 
+    // Used to retrieve specific medication data within the the MedicationRequest FHIR call response
+    // Stores this information into the medicationdataList
     function extractMedicationData(activeMeds) {
       const medicationDataList = [];
 
@@ -197,19 +197,13 @@ const HomePage = () => {
 
       return medicationDataList;
     }
-
-    // console.log("response_appts", response_appts);
-    // console.log("active_meds", response_activeMeds);
-    // console.log("patient", response_patient.name[0].text);
     const closestAppointments = getFutureAppointments(response_appts);
     console.log("closest future 3 appointments", closestAppointments);
+
     setUserAppointments(closestAppointments);
     console.log(userAppointments)
-    const allActorsList = extractAllActorsForAllEntries(response_appts);
-    // console.log("all actors", allActorsList);
 
     const medicationDataList = extractMedicationData(response_activeMeds);
-    // console.log("medications data list", medicationDataList);
     setRequestedMedications(medicationDataList);
 
     //Looks up the medications in the medication data list by Epic reference ID
@@ -235,6 +229,7 @@ const HomePage = () => {
       return medicationLookupValue;
     }
 
+    // EPIC provides many codes for the same medication. This function looks through the drug codes to find the ones that are RxNorm.
     function extractRxNormCodes(data) {
       const rxnormCodes = [];
 
@@ -247,6 +242,7 @@ const HomePage = () => {
       return rxnormCodes;
     }
 
+    // These functions use the NLM API to look up the RxNorm medication name for the rxcuis provided by EPIC
     function getApiResponse(searchTerm) {
       const apiUrl = `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${searchTerm}&maxList=5&sf=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS,&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS`;
 
@@ -267,26 +263,10 @@ const HomePage = () => {
       const promises = searchList.map((searchTerm) =>
         getApiResponse(searchTerm)
       );
-      // console.log("promises", promises);
       return Promise.all(promises);
     }
 
-    function getApiResponse(searchTerm) {
-      const apiUrl = `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?terms=${searchTerm}&maxList=5&sf=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS,&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS`;
-
-      return fetch(apiUrl)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok.");
-          }
-          return response.json();
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          return null;
-        });
-    }
-
+    //Ensures that the selected medication from the RxNorm has dosages associated with them
     function findDrugObjectWithDose(resl, searchString) {
       let result = {};
 

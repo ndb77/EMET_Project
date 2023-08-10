@@ -5,6 +5,10 @@ import { ChangeMedicationFormReason2 } from "./ChangeMedicationFormReason2";
 import { useState } from "react";
 import { useStoreActions } from "easy-peasy";
 import { Link, useHistory } from "react-router-dom";
+
+// This is a child of the MedicationChange component and is a parent of ChangeMedicationFormReason and ChangeMedicationFormReason2
+// This stores the data collected from the child forms and packages them into an object submitData which is eventually stored within the edit object of a medication object
+// Edit areas that are left blank are accounted for within the store.js file
 const ChangeMedicationForm = ({ id }) => {
   const [clinicianStopped, setClinicianStopped] = useState("");
   const [newDosage, setNewDosage] = useState("");
@@ -31,6 +35,7 @@ const ChangeMedicationForm = ({ id }) => {
     setNewTime(edits);
   }
 
+  // This keeps track of which step the user is on and provides the useState functions as required
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <ChangeMedicationFormReason
@@ -83,7 +88,6 @@ const ChangeMedicationForm = ({ id }) => {
                 Back
               </button>
             )}
-            {/* {isLastStep ? <button type="submit">Finish</button> : <button type="submit">Next</button>} */}
             <button type="submit">{isLastStep ? "Finish" : "Next"}</button>
           </div>
         </form>

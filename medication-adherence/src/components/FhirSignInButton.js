@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FHIR from "fhirclient";
-import axios from "axios";
 
+// This component causes the application to automatically redirect to EPIC MyChart Sign-in
 const FhirSignInButton = () => {
   const [authorizeLink, setAuthorizeLink] = useState("");
   
@@ -11,9 +11,7 @@ const FhirSignInButton = () => {
       const scope =
         "PATIENT.READ PATIENT.SEARCH OBSERVATION.READ OBSERVATION.SEARCH MEDICATIONREQUEST.READ MEDICATIONREQUEST.SEARCH";
       const redirectUri = "http://localhost:3000/home"; // Replace with your redirect URI
-      const serverUrl = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"; // Replace with your FHIR server URL
-
-      
+      const serverUrl = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"; // Replace if needed with your FHIR server URL
 
       try {
         const authorizeLink = await FHIR.oauth2.authorize({

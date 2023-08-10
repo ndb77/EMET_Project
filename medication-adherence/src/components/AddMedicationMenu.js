@@ -1,5 +1,4 @@
 import React from "react";
-import useScript from "../hooks/useScript";
 import AddMedicationSearchBar from "./AddMedicationSearchBar";
 import useAxiosFetch from "../hooks/useAxiosFetch";
 import { useEffect, useState } from "react";
@@ -8,8 +7,11 @@ import AddMedicationInstructions from "./AddMedicationInstructions";
 import AddMedicationPrescriber from "./AddMedicationPrescriber";
 import { Link,useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useStoreActions, useStoreState } from "easy-peasy";
-// import AddMedicationValidUntilDate from "./AddMedicationValidUntilDate";
 import AddMedicationWhenTaken from "./AddMedicationWhenTaken";
+
+
+// This menu is a child of the AddMedicationPage and a parent of AddMedicationInstructions, AddMedicationPrescriber, AddMedicationSearchBar, AddMedicationstrengthList, AddMedicationWhenTaken
+// This menu collects information from all of its child components and packages the information into an object "submitData" which is sent to the local browser storage
 const AddMedicationMenu = () => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -20,8 +22,9 @@ const AddMedicationMenu = () => {
   const [medicationName, setMedicationName] = useState("");
   const [medicationRXCUI, setMedicationRXCUI] = useState("");
   const [medicationID, setMedicationID] = useState("");
-  // const [validUntilDate,setValidUntilDate] = useState("")
   const [medicationWhenTaken,setMedicationWhenTaken] = useState("")
+
+  //This API call is used for the the autocomplete functionality of the search bar and search result
   const { data, fetchError, isLoading } = useAxiosFetch(
     `https://clinicaltables.nlm.nih.gov/api/rxterms/v3/search?&terms=${search}&maxList=5&sf=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS,&df=DISPLAY_NAME,STRENGTHS_AND_FORMS,RXCUIS`
   );
@@ -30,15 +33,21 @@ const AddMedicationMenu = () => {
   const history = useHistory()
 
   useEffect(() => {
+
+    // data[1] refers to the medication name which is returned by the api call at index 1
     if (isLoading === false && search !== "" && data[1] !== []) {
       setSearchResult(data[1]);
     } else {
       setSearchResult([]);
     }
+    //Check to see that the strengths list is not empty
     if (isLoading === false && search !== "" && data[3].length > 0) {
       setMedicationID(()=>{
+        // setting the medicationID for the local medication list.
         return medicationsList.length ? medicationsList[medicationsList.length-1].listID + 1 : 0;
       })
+      // setting the strength results list that is available in the strength dropdown menu
+      // data[3][0][1] returns a list of strengths for the selected medication
       setStrengthResult(data[3][0][1].split(","));
       setMedicationRXCUI(() => {
         let index = 0;
@@ -65,6 +74,7 @@ const AddMedicationMenu = () => {
 
   }, [search, data, prescriber, instructions, strength, medicationRXCUI]);
 
+  // Function to split up the dose and units returned by the NLM API
   function splitString(string) {
     const cleanedString = string.replace(/^\s+/, "");
     const regex = /^([\d.-]+)\s*(.*)$/; // Updated regex to allow for decimal, hyphen, and dot in quantity
@@ -78,6 +88,7 @@ const AddMedicationMenu = () => {
     }
   }
 
+  // Stores the medication information into the local storage. Triggered upon clicking save changes
   function handleSave(){
     let submitData = {
       id: medicationID,

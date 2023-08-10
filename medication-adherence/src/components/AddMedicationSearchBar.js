@@ -1,5 +1,9 @@
 import React from "react";
 import { useState } from "react";
+
+// Recieves the API results from the NLM API call from the parent and renders them into the dropdown menu
+// Sends keystrokes made in the text box to be queried by the NLM API made by the parent
+// **A problem currently exists where the dropdown menu shows up in an incorrect spot when viewed on mobile**
 const AddMedicationSearchBar = ({
   search,
   setSearch,

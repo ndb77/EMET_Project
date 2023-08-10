@@ -3,9 +3,10 @@ import { useParams } from "react-router-dom";
 import { useStoreState } from "easy-peasy";
 import { useEffect, useState } from "react";
 import ChangeMedicationForm from "./ChangeMedicationForm";
+
+// Renders the medication change page for each medication on the medication list
 const MedicationChange = () => {
   const { id } = useParams();
-  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const medications = useStoreState((state) => state.medications);
   
@@ -26,7 +27,6 @@ const MedicationChange = () => {
   useEffect(() => {
     if (medications.length > 0) {
       setData(medications);
-      setLoading(false);
     }
   }, [medications]);
 

@@ -2,6 +2,8 @@ import React from "react";
 import MedicationListTableComponent from "./MedicationListTableComponent";
 import helpLogo from "../img/live-help-logo.png";
 import { Link } from "react-router-dom";
+
+// Renders the current medication list using the MedicationListTableComponent with the prop "current"
 const CurrentMedicationList = () => {
   return (
     <div className="container" style={{ maxWidth: 960, marginBottom: 20 }}>

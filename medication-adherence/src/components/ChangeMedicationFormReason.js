@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// The first step of the form which sends to the parent which option should be further expanded in the second step of the form.
 export function ChangeMedicationFormReason({setFirstStepSelection}) {
   const [selectedOption, setSelectedOption] = useState(null);
   const handleRadioChange = (event) => {

@@ -4,6 +4,8 @@ import { useReactToPrint } from "react-to-print";
 import { PrintPageTable } from "./PrintPageTable";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
+// Provides the user the ability to print out their medications
+// This component is very similar to MedicaitonListTableComponent however this component wraps the table component in a ref so that it can be printed with formatted page breaks
 const PrintMedicationsPage = () => {
   const componentRef = useRef();
   const columns = [

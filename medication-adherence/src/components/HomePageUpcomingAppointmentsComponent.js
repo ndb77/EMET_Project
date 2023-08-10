@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 
+// Renders the scrollable list for upcoming appointments
+// Each appointment is rendered to an appointment 
+// ** Currently the appointment cards are hard coded. This needs to be upgraded so that .map is used to render each appointment card
+// Data used to populate this information is populated using responses from FHIR calls to EPIC
 const HomePageUpcomingAppointmentsComponent = ({
   appointmentType,
   physician,

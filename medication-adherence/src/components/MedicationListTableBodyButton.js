@@ -2,6 +2,8 @@ import React from "react";
 import reactRouterDom, { Link } from "react-router-dom";
 import { useStoreState, useStoreActions } from "easy-peasy";
 import { useEffect, useState } from "react";
+
+// A button that adjusts values within the medication object when clicked
 const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
   const changeMedicationStatus = useStoreActions(
     (actions) => actions.changeMedicationStatus
@@ -10,14 +12,6 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState();
 
-  function transformToInput() {
-    // Get the button element
-    const button = document.querySelector("button");
-
-    // Create an input element
-    const input = document.createElement("input");
-    input.type = "text";
-  }
   useEffect(() => {
     if (medications.length>0) {
       setData(medications);
@@ -44,8 +38,6 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
             let medicationConfirmStatus =  data.find(
               (item) => item.listID === medicationID
             )
-            // console.log('data on click',data)
-            // console.log('confirmstat on click',medicationConfirmStatus.confirmStatus)
             changeMedicationStatus({
               medicationID: medicationID,
               status:

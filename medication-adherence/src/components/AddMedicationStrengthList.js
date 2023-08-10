@@ -1,4 +1,6 @@
 import React from "react";
+
+//Recieves the prescribable strengths from the NLM API calls made by the parent and renders them to the dropdown onclick
 const AddMedicationStrengthList = ({ strengthResult, setStrength, editDosage,editUnits, currentStrength}) => {
   function isSubstring(str1, str2) {
     const sanitizedStr1 = str1.replace(/\s/g, ''); // Remove all spaces from str1

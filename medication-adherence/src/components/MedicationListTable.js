@@ -1,13 +1,6 @@
 import React from "react";
 import MedicationListTableBodyButton from "./MedicationListTableBodyButton";
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const year = date.getFullYear();
-  const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
 function convertTo12HourFormat(time24) {
   // Split the time into hours and minutes
   const [hours, minutes] = time24.split(":");
@@ -34,21 +27,18 @@ function checkSideEffectOrOther(edits) {
     return undefined; // Return undefined if the keys are not present or the values are falsy
   }
 }
-
-function extractDate(inputString) {
-  const regex =
-    /Until (?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (\d{1,2}\/\d{1,2}\/\d{4})/;
-  const matches = inputString.match(regex);
-  return matches ? matches[1] : null;
-}
+// Renders the table body for the medication list.
 const MedicationListTable = ({ columns, tableData, medicationListVersion }) => {
   const today = new Date().toISOString().split("T")[0];
 
+  // The table will render according to which type of table is required
   if (medicationListVersion === "current") {
     return (
       <tbody>
+        {/* Puts each medication in the medication list into a table row */}
         {tableData.map((entry) => (
           <tr key={entry.listID}>
+            {/* goes through each accessor provided within the columns list to add each table cell*/}
             {columns.map(({ accessor }) => {
               let tData = null;
               if (accessor === "notes") {
@@ -78,9 +68,6 @@ const MedicationListTable = ({ columns, tableData, medicationListVersion }) => {
               } else {
                 tData = null;
               }
-
-              // Add other logic for rendering table data
-
               return (
                 <td
                   key={accessor}

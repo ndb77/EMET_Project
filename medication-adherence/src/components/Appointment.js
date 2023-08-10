@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+// The appointment page. This page is not currently implemented in the application and is not rendered by the parent. 
 const Appointment = () => {
   return (
 <div className="container" style={{maxWidth: 960}}>

@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Simple input field that sends keystrokes back to parent
 const AddMedicationInstructions = ({setInstructions}) => {
   return (
     <div>
