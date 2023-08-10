@@ -22,8 +22,8 @@ Because this web application uses FHIR resources to interface with the EPIC syst
   * OBSERVATION.READ 
   * OBSERVATION.SEARCH 
   * MEDICATIONREQUEST.READ
-  *  MEDICATIONREQUEST.SEARCH
-5. Designate the URL to which EPIC will redirect to after authentication. For this application, we use localhost:3000/home
+  * MEDICATIONREQUEST.SEARCH
+5. Designate the URL to which EPIC will redirect to after authentication. For this application, we use `localhost:3000/home`
 6. Select "Can Register Dynamic Clients"
 7. Select "Refresh Token Grant Type"
 8. Select FHIR version "R4"
@@ -42,10 +42,10 @@ At the time of writing, EPIC does not have upcoming appointments for the test pa
 ### Setting up and Running the web app
 
 Once the EMET_project directory is set up on your local device, and you have registered your instance of the application with EPIC:
-1. Navigate to ./medication-adherence/src/components/FhirSignInButton.js and **paste your client ID into the clientID variable**
-2. Navigate to ./medication-adherence/src/components/HomePage.js and **paste your appointments ID into appointmentsPatientID and bearer into appointmentsPatientBearer**. Note that the bearer token expires on a timed basis. 
-3. Navigate to ./medication-adherence and run the command `npm start`
+1. Navigate to `./medication-adherence/src/components/FhirSignInButton.js` and **paste your client ID into the clientID variable**
+2. Navigate to `./medication-adherence/src/components/HomePage.js` and **paste your appointments ID into appointmentsPatientID and bearer into appointmentsPatientBearer**. Note that the bearer token expires on a timed basis. 
+3. Navigate to `./medication-adherence` and run the command `npm start`
 4. EPIC credentials for this applications test patient are:
-  * username: fhircamila
-  * password: epicepic1
+  * username: **fhircamila**
+  * password: **epicepic1**
   * Other test patients with different available data are found here: https://fhir.epic.com/Documentation?docId=testpatients
