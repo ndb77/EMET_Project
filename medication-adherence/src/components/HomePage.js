@@ -39,20 +39,21 @@ const HomePage = () => {
   async function doRequests() {
     // test EPIC patient ID and bearer. Not the same patient as was logged in with.
     // Needed because logged in patient does not have any future appointments
-    const appointmentsPatientID = "erXuFYUfucBZaryVksYEcMg3";
-    const appointmentsPatientBearer = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1cm46b2lkOmZoaXIiLCJjbGllbnRfaWQiOiJkOWYwN2JlNi0yOGNkLTQ2OWEtYjJjMS1jNjU5NWNjODE5MDEiLCJlcGljLmVjaSI6InVybjplcGljOk9wZW4uRXBpYy1jdXJyZW50IiwiZXBpYy5tZXRhZGF0YSI6IjNwMXhORlJRRDhXcEkzc1REZ2JxZFkzeHpoaENyZFZxOG9razJXcGVUM25wUWxFR0tXTG9weEFUamhtVjVJeU5BSGZRUVpiWXhJQzYyUlN1MHVScEdxajI5aWl2Y1pHZUg3RTI3NDdRanFrYWV6ZzVWanU2aVQ5ODVkcEpTbDI2IiwiZXBpYy50b2tlbnR5cGUiOiJhY2Nlc3MiLCJleHAiOjE2OTE1MjAwOTksImlhdCI6MTY5MTUxNjQ5OSwiaXNzIjoidXJuOm9pZDpmaGlyIiwianRpIjoiZjk2M2VmYzctOWZkZC00NTU2LTkwZTEtNDc1NWRlYWIzMTA3IiwibmJmIjoxNjkxNTE2NDk5LCJzdWIiOiJldk5wLUtoWXdPT3FBWm4xcFoyZW51QTMifQ.Z62O0lQobaGAFH4I3usXBXkun1aqbZsHW6Tib-6vKYMx7X_CFTxwCXlp2K4dYPSoX3FPnoPZ9MGluxjpu-i3OW0EL4FIonMhd7dEZhCyb_45bdjfRcRFx3Xt01lCXkp4pNo5HCyCTPYAvh9Tolfnznk6VBhgIjF2gwW5C46u4phGoGgpbF8E3cN1RKcoUqAhPRLxt64HFSPEbWu2vgqoVaNPzHQMCBbQlvzp7qLm5X1Pe7LZvltC1NDg91O1CQUhbJt5rhCovVwsMlwwA9n8C_WaD5Fqmpjm0pxgpZbPWq2pFpBeXljGGL427yF80sE3kvWk4x2GU2NPlA-_1OsuvA";
+    const appointmentsPatientID = ""; // Paste your patient ID here
+    const appointmentsPatientBearer = ""; // paste your bearer string here
+    
     // getting Appointment, Patient, and MedicationRequest(active only) resources
     console.log('req',myApp.smart.state.serverUrl +
-    "/Appointment?patient=" + appointmentsPatientID + "&service-category=appointment")
+    "/Appointment?patient=" + (appointmentsPatientID!==""?appointmentsPatientID:myApp.smart.patient.id) + "&service-category=appointment")
     var [appts, patient, activeMeds] = await Promise.all([
       fetch(
         myApp.smart.state.serverUrl +
-          "/Appointment?patient=" + appointmentsPatientID + "&service-category=appointment",
+          "/Appointment?patient=" + (appointmentsPatientID!==""?appointmentsPatientID:myApp.smart.patient.id) + "&service-category=appointment",
         {
           headers: {
             Accept: "application/json+fhir",
             Authorization:
-              "Bearer " + appointmentsPatientBearer,
+              "Bearer " + (appointmentsPatientBearer!==""?appointmentsPatientBearer:myApp.smart.state.tokenResponse.access_token),
           },
         }
       ).then(function (data) {
