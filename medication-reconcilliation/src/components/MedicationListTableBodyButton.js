@@ -40,8 +40,7 @@ const MedicationListTableBodyButton = ({ medicationID, selectionType }) => {
             )
             changeMedicationStatus({
               medicationID: medicationID,
-              status:
-              medicationConfirmStatus.confirmStatus === "confirmed"
+              status: medicationConfirmStatus.confirmStatus === "confirmed"
                   ? "unedited"
                   : "confirmed",
             });

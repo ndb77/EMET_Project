@@ -9,7 +9,7 @@ const FhirSignInButton = () => {
     const createAuthorizeLink = async () => {
       const clientId = "98c8c513-fe6d-40be-8ec4-1fbd5d1d73a2"; // Replace with your client id
       const scope =
-        "PATIENT.READ PATIENT.SEARCH OBSERVATION.READ OBSERVATION.SEARCH MEDICATIONREQUEST.READ MEDICATIONREQUEST.SEARCH";
+        "";
       const redirectUri = "http://localhost:3000/home"; // Replace with your redirect URI
       const serverUrl = "https://fhir.epic.com/interconnect-fhir-oauth/api/FHIR/R4"; // Replace if needed with your FHIR server URL
 

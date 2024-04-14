@@ -169,7 +169,7 @@ export default createStore({
         },
         dosageInstruction: [
           {
-            text: 'Take 1 tablet by mouth 1 (one) time each day., Starting Tue 5/28/2019, Until Wed 5/27/2020, Normal',
+            text: '',
             patientInstruction: instructions,
             timing: {
               repeat: {
